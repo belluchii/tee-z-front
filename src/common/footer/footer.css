@@ -1,0 +1,27 @@
+footer {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  z-index: 10;
+  margin-top: 60px;
+  margin-bottom: 2%;
+  padding-top: 2%;
+  box-shadow: 0px -1px 1px #fff;
+  background: #000;
+  height: 100%;
+}
+
+.a-bot {
+  align-items: end;
+}
+
+@media (max-width: 1000px) {
+  footer {
+    flex-direction: column;
+  }
+}
+
+footer * {
+  margin: 5px 15px;
+  margin-bottom: 0;
+}
