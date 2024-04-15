@@ -1,0 +1,19 @@
+.cont-product {
+  width: 350px;
+  display: flex;
+  margin-top: 20px;
+}
+
+.product {
+  margin: auto;
+  background-size: contain;
+  max-width: 350px;
+  height: 500px;
+}
+.desc-product {
+  margin-top: 15px;
+  margin-left: 5px;
+}
+.h3-product {
+  font-weight: 300;
+}

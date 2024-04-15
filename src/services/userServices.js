@@ -12,12 +12,11 @@ export const createUser = async (userData) => {
     );
     alert("usuario creado correctamente");
 
-    return response.data; // Devolver los datos del usuario creado
+    return response; // Devolver los datos del usuario creado
   } catch (error) {
     alert(
       "El email ya se encuentra en uso por favor intente de nuevo con uno diferente"
     );
-    return error; // Lanzar un error en caso de falla
   }
 };
 
@@ -31,9 +30,8 @@ export const validateUser = async (userData) => {
     );
     alert("usuario logueado correctamente");
 
-    return response.data; // Devolver los datos del usuario validado
+    return response; // Devolver los datos del usuario validado
   } catch (error) {
     alert("Error al iniciar sesion por favor reingrese sus datos");
-    return error; // Lanzar un error en caso de falla
   }
 };

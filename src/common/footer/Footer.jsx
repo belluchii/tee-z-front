@@ -12,11 +12,11 @@ export default function Footer() {
         </div>
         <div>
           <h3>Dirección </h3>
-          <p>Corrientes 1122, CABA</p>
+          <p>Corrientes xxxx, CABA</p>
         </div>
         <div>
           <h3>Teléfono</h3>
-          <p> +54 234 567 890</p>
+          <p> +xx xxx xxx xxx</p>
         </div>
         <div>
           <h3>Tee-z</h3>

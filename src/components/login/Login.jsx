@@ -20,7 +20,6 @@ export default function Login() {
               placeholder: "ingrese su contraseña",
               name: "password",
               type: "password",
-              minlength: 8,
             },
           },
         ]}

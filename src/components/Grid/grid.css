@@ -1,0 +1,8 @@
+.cont-grid {
+  display: grid;
+  width: 80%;
+  margin: auto;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 20px 40px; /* Espacio entre elementos */
+  justify-items: center; /* Centra los elementos horizontalmente */
+}

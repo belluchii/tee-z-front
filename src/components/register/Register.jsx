@@ -18,7 +18,7 @@ export default function Register() {
             props: {
               type: "password",
               name: "password",
-              minlength: 8,
+              minLength: 8,
               placeholder: "ingrese su contraseña",
             },
             title: "contraseña",
@@ -28,7 +28,7 @@ export default function Register() {
               type: "password",
               name: "repassword",
               placeholder: "confirme su contraseña",
-              minlength: 8,
+              minLength: 8,
             },
             title: "reingrese su contraseña",
           },

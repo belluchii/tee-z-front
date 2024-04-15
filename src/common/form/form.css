@@ -1,4 +1,4 @@
-form {
+.cont-form {
   border: 1px solid #fff;
   width: 40vw;
   margin: 20vh auto;
@@ -6,7 +6,7 @@ form {
   flex-direction: column;
 }
 
-h3 {
+.h3-form {
   margin: 10px 0;
   text-align: center;
   font-weight: 300;

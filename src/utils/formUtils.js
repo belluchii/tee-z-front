@@ -4,5 +4,5 @@ export const handleSubmit = async (event, children, func) => {
   children.forEach((elem) => {
     formData[elem.props.name] = event.target[elem.props.name].value;
   });
-  await func(formData);
+  return await func(formData);
 };

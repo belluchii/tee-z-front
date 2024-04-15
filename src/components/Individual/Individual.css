@@ -1,0 +1,38 @@
+.cont-product-individual {
+  width: min-content;
+  margin: auto;
+  height: 100%;
+  width: 80vw;
+  display: flex;
+  justify-content: center;
+}
+
+.product-individual {
+  background-size: contain;
+  height: 80vh;
+}
+
+.desc-individual {
+  margin-left: 20px;
+  display: flex;
+  height: 40vh;
+  flex-direction: column;
+}
+
+.desc-individual > * {
+  margin: 10px 0;
+}
+
+.select-cont-individual {
+  display: flex;
+  flex-direction: column;
+  width: min-content;
+}
+
+.selects-cont-individual {
+  display: flex;
+}
+
+.input-number-individual {
+  width: min-content;
+}

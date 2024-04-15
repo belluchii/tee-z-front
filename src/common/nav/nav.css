@@ -1,6 +1,38 @@
 nav {
   top: 0px;
   position: sticky;
+  z-index: 10;
+}
+
+.reverse {
+  rotate: 180deg;
+}
+
+.dropdown {
+  background: #000;
+  position: absolute;
+  width: max-content;
+  top: 100px;
+  right: 3px;
+  border: 2px solid #fff;
+  box-shadow: 1px 1px 10 px #000;
+}
+
+.dropdown p {
+  text-align: center;
+  padding-top: 10px;
+}
+.dropdown:last-child {
+  padding-bottom: 10px;
+}
+.m-center {
+  margin: auto;
+}
+
+.m-arrow {
+  transition: 0.3s;
+  margin: auto 5px;
+  margin-right: 20px;
 }
 ul {
   width: 100vw;
