@@ -43,7 +43,7 @@ Configurar variables de entorno
 
 Crea un archivo .env en el directorio frontend con el siguiente contenido:
 
-API_KEY=http://localhost:3001
+REACT_APP_API_KEY=http://localhost:3001
 
 Inicia la aplicación:
 
@@ -52,7 +52,6 @@ npm start
 Uso:
 Accede a la aplicación en tu navegador en http://localhost:3000.
 Regístrate o inicia sesión para comenzar a comprar remeras.
-
 
 Contribución
 ¡Contribuciones son bienvenidas! Por favor, sigue los siguientes pasos para contribuir:
@@ -67,5 +66,3 @@ Abre un Pull Request.
 Licencia
 
 Este proyecto está bajo la licencia MIT. Consulta el archivo LICENSE para más detalles.
-
-
