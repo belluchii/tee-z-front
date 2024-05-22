@@ -14,7 +14,7 @@ export default function Nav() {
   usePutData({ data: data, setData: setData });
   useEffect(() => {
     if (value !== "") navigate("/products?string=" + value);
-  }, [value]);
+  }, [value, navigate]);
 
   return (
     <>

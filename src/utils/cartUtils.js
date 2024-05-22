@@ -1,5 +1,5 @@
 export const getStock = (title, cart) => {
-  return cart.filter((elem) => elem == title).length;
+  return cart.filter((elem) => elem === title).length;
 };
 export const getTotal = (products, cart) =>
   products.reduce(
@@ -29,10 +29,11 @@ export const buyCart = (data, setData, products, reduceProduct) => {
   if (data.cart.length <= 0) alert("carrito vacio");
   else {
     [...new Set(data.cart)].map((elem) => {
-      let prod = products.find((prod) => prod.name == elem);
+      let prod = products.find((prod) => prod.name === elem);
       if (prod.stock < getStock(elem, data.cart))
-        alert("hubo un problema de stock al hacer su pedido");
-      else reduceProduct(prod._id, prod.stock - getStock(elem, data.cart));
+        return alert("hubo un problema de stock al hacer su pedido");
+      else
+        return reduceProduct(prod._id, prod.stock - getStock(elem, data.cart));
     });
     setData({
       ...data,

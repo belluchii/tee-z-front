@@ -13,7 +13,7 @@ export default function Form({ children, button, func }) {
     if (data.email) {
       navigate("/");
     }
-  }, [data]);
+  }, [data, navigate]);
 
   return (
     <>
@@ -21,7 +21,7 @@ export default function Form({ children, button, func }) {
         className="cont-form"
         onSubmit={async (event) => {
           let user = await handleSubmit(event, children, func);
-          if (typeof user == "object") {
+          if (typeof user === "object") {
             setData({
               email: user.data.email,
               favs: user.data.favs,

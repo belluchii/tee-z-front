@@ -17,7 +17,7 @@ export default function Grid({ arr }) {
   useFetchData({ func: getProducts, set: setProducts });
   useEffect(() => {
     if (arr && !data.email) navigate("/");
-  }, [data]);
+  }, [data, navigate, arr]);
   return (
     <>
       <Title

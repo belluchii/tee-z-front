@@ -6,5 +6,6 @@ export const handleFilter = (arr, param, string, data) => {
         elem.tags.includes(string ? string.toLowerCase() : "")
       );
     else if (data[param]) return data[param].includes(elem.name);
+    return false;
   });
 };

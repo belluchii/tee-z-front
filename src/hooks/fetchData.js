@@ -13,7 +13,7 @@ export const useFetchData = ({ func, set, params = null }) => {
       }
     };
     fetchData();
-  }, [params]);
+  }, [params, func, set]);
 };
 
 export const useFetchMultipleData = ({ func, set, arr }) => {
@@ -39,5 +39,5 @@ export const useFetchMultipleData = ({ func, set, arr }) => {
     };
 
     fetchMultipleData();
-  }, []);
+  }, [func, set, arr]);
 };
