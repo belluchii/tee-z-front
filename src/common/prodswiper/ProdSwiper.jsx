@@ -7,7 +7,7 @@ import "./swiper.css";
 import "swiper/css";
 import { Link } from "react-router-dom";
 
-export default function ({ h2, tag }) {
+export default function ProdSwiper({ h2, tag }) {
   const [prods, setProds] = useState([]);
   useFetchData({ func: getByTag, set: setProds, params: tag });
 

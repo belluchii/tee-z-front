@@ -33,7 +33,11 @@ export default function Individual() {
             <div className="left-zoom" />
             <div className="right-zoom" />
           </div>
-          <img src={product.image} className="product-individual" />
+          <img
+            src={product.image}
+            alt={product.name}
+            className="product-individual"
+          />
         </div>
         <form className="info-individual">
           <h2 className="text-center">

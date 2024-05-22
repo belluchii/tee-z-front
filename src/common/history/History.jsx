@@ -3,7 +3,6 @@ import DataContext from "../../context/context";
 import { apilarProductos } from "../../utils/historyUtils";
 import { useFetchMultipleData } from "../../hooks/fetchData";
 import { getOneProduct } from "../../services/productServices";
-import { Link } from "react-router-dom";
 import Title from "../Title/Title";
 
 export default function History() {
