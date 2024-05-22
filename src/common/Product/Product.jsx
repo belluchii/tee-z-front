@@ -4,8 +4,6 @@ import { useContext } from "react";
 import "./product.css";
 export default function Product({ name, price, src }) {
   const { data, setData } = useContext(DataContext);
-  const img =
-    "https://http2.mlstatic.com/D_NQ_NP_627659-MLA54719189617_032023-O.webp";
 
   return (
     <>

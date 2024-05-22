@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const getProducts = async () => {
   try {
-    return await axios.get(API_KEY + "/api/products");
+    return await axios.get(process.env.API_KEY + "/api/products");
   } catch (error) {
     console.error(error);
   }
