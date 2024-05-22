@@ -119,10 +119,20 @@ export default function Nav() {
                   ) : (
                     <>
                       <Link to={"/login"}>
-                        <h2 className="shadow cursor">iniciar sesion</h2>
+                        <h2
+                          onClick={() => setValue("")}
+                          className="shadow cursor"
+                        >
+                          iniciar sesion
+                        </h2>
                       </Link>
                       <Link to={"/register"}>
-                        <h2 className="shadow cursor">registrarse</h2>
+                        <h2
+                          onClick={() => setValue("")}
+                          className="shadow cursor"
+                        >
+                          registrarse
+                        </h2>
                       </Link>
                     </>
                   )}
