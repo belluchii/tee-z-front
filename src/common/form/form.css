@@ -1,13 +1,13 @@
 .cont-form {
   border: 1px solid #fff;
-  width: 40vw;
+  width: 600px;
   margin: 20vh auto;
   display: flex;
   flex-direction: column;
 }
 
 .h3-form {
-  margin: 10px 0;
+  margin: 12px 0;
   text-align: center;
   font-weight: 300;
   font-size: 24px;
@@ -17,11 +17,15 @@
   border: 1px solid #fff;
   padding: 12px;
   margin: 30px auto;
+  background: none;
   font-weight: 300;
   font-size: 24px;
 }
 
 .input-form {
+  padding: 12px;
+  border: 1px solid #fff;
+  background: none;
   width: 90%;
   margin: auto;
   display: block;
@@ -29,4 +33,13 @@
 
 .input-form::placeholder {
   font-size: 18px;
+}
+
+@media (max-width: 700px) {
+  .cont-form {
+    width: 350px;
+  }
+  .input-form {
+    width: 80%;
+  }
 }

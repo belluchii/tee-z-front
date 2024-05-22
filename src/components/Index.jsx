@@ -1,14 +1,17 @@
 import Footer from "../common/footer/Footer";
 import Main from "../common/main/Main";
-import Trending from "../common/Trending/Trending";
+import ProdSwiper from "../common/prodswiper/ProdSwiper";
 
 export default function Index() {
   return (
     <>
       <Main />
-      <Trending />
-      <Trending />
+      <ProdSwiper h2={"A la moda"} tag={"Oversize"} />
+      <ProdSwiper h2={"Favoritos de esta semana"} tag={"Urban"} />
+      <ProdSwiper h2={"Vanguardistas"} tag={"Aesthetic"} />
       <Footer />
     </>
   );
 }
+
+//<Trending name={"los angeles overzise"} title={"Top sellers"} />

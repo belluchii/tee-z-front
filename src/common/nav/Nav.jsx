@@ -2,91 +2,146 @@ import DataContext from "../../context/context";
 import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./nav.css";
+import Cart from "../cart/Cart";
+import { usePutData } from "../../hooks/putData";
+import Dropdown from "../dropdown/Dropdown";
 
 export default function Nav() {
   const navigate = useNavigate();
   const { data, setData } = useContext(DataContext);
+  const [cart, setCart] = useState(false);
   const [value, setValue] = useState("");
-  const [dropdown, setDropdown] = useState(false);
-
+  usePutData({ data: data, setData: setData });
   useEffect(() => {
     if (value !== "") navigate("/products?string=" + value);
   }, [value]);
 
   return (
-    <nav>
-      <ul>
-        <li className="d-none-sm">
-          <Link to="/">
-            <img src="./z render.webp" alt="z-logo" height={40} />
-          </Link>
-          <Link to="/categorias">
-            <p className="shadow pad-12 d-none-md">Categorias</p>
-          </Link>
-          <Link to="/products">
-            <p className="shadow d-none-md pad-12">Productos</p>
-          </Link>
-        </li>
-        <li>
-          <input
-            onChange={(event) => {
-              if (event.target.value !== "") setValue(event.target.value);
-              else setValue(" ");
-            }}
-            className="shadow"
-            placeholder="buscar"
-            type="text"
-          />
-        </li>
-        {data && data.email ? (
-          <>
-            <li>
-              <button
-                onClick={() => setDropdown(!dropdown)}
-                className="m-center shadow"
-              >
-                {data.email.split("@")[0].slice(0, 10)}
-                <i
-                  className={
-                    dropdown
-                      ? "fa-solid fa-caret-down  fa-2xs shadow  m-arrow reverse"
-                      : "fa-solid fa-caret-down  fa-2xs shadow  m-arrow "
-                  }
-                ></i>
-              </button>
-
-              {dropdown ? (
-                <div className="dropdown">
-                  <p className="shadow">carrito</p>
-                  <p className="shadow">historial</p>
-                  <Link to="/products/favs" className="shadow">
-                    <p>favoritos</p>
-                  </Link>
-                  <button
-                    className="shadow"
-                    onClick={() =>
-                      setData({ email: null, favs: null, cart: null })
+    <>
+      <nav>
+        <ul className="ul-nav">
+          <li>
+            <Dropdown
+              dropTarget={
+                <i className="fa-solid fa-magnifying-glass shadow cursor" />
+              }
+              children={
+                <>
+                  <p></p>
+                  <input
+                    type="text"
+                    onChange={(e) => setValue(e.target.value)}
+                    className="dropdown-input cursor"
+                  />
+                </>
+              }
+            />
+          </li>
+          <li>
+            <Dropdown
+              dropTarget={<i className="fa-solid fa-shirt shadow" />}
+              children={
+                <>
+                  <Dropdown
+                    dropTarget={<h2 className="shadow cursor">categorias</h2>}
+                    children={
+                      <>
+                        <h2
+                          className="shadow cursor"
+                          onClick={() => {
+                            if (value === "Oversize") setValue("oversize");
+                            else setValue("Oversize");
+                          }}
+                        >
+                          Oversize
+                        </h2>
+                        <h2
+                          className="shadow cursor"
+                          onClick={() => {
+                            if (value === "Urban") setValue("urban");
+                            else setValue("Urban");
+                          }}
+                        >
+                          Urban
+                        </h2>
+                        <h2
+                          className="shadow cursor"
+                          onClick={() => {
+                            if (value === "Aesthetic") setValue("aesthetic");
+                            else setValue("Aesthetic");
+                          }}
+                        >
+                          Aesthetic
+                        </h2>
+                      </>
                     }
-                  >
-                    cerrar sesion
-                  </button>
-                </div>
-              ) : (
-                <></>
-              )}
-            </li>
-          </>
-        ) : (
-          <li className="d-none-md">
-            <Link to="/login">
-              <button className="shadow pad-12">Iniciar Sesion</button>
-            </Link>
-            <Link to="/register">
-              <button className="shadow border">Registrarse</button>
+                  />
+                  <Link to={"/products"}>
+                    <h2 className="shadow cursor">productos</h2>
+                  </Link>
+                </>
+              }
+            />
+          </li>
+          <li>
+            <Link to={"/"}>
+              <img src="./z-render.webp" alt="z-logo" height={40} />
             </Link>
           </li>
-        )}
-      </ul>
-    </nav>
+
+          <li>
+            <Dropdown
+              dropTarget={<i className="fa-solid fa-user shadow"></i>}
+              children={
+                <>
+                  {data.email ? (
+                    <>
+                      <Link to={"/products/favs"}>
+                        <h2 className="shadow cursor">favoritos</h2>
+                      </Link>
+                      <Link to={"/products/history"}>
+                        <h2 className="shadow cursor">historial</h2>
+                      </Link>
+                      <h2
+                        className="shadow cursor"
+                        onClick={() =>
+                          setData({
+                            cart: null,
+                            email: null,
+                            favs: null,
+                            history: null,
+                          })
+                        }
+                      >
+                        salir
+                      </h2>
+                    </>
+                  ) : (
+                    <>
+                      <Link to={"/login"}>
+                        <h2 className="shadow cursor">iniciar sesion</h2>
+                      </Link>
+                      <Link to={"/register"}>
+                        <h2 className="shadow cursor">registrarse</h2>
+                      </Link>
+                    </>
+                  )}
+                </>
+              }
+            />
+          </li>
+          <li>
+            <i
+              className="fa-solid fa-cart-plus shadow cursor"
+              onClick={() => {
+                if (data.email) setCart(true);
+                else alert("debes loguearte para ver tu carrito");
+              }}
+            ></i>
+          </li>
+        </ul>
+      </nav>
+      {data.email && <Cart setCart={setCart} cart={cart} />}
+    </>
   );
 }

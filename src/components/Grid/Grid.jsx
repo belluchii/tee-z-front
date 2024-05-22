@@ -3,27 +3,38 @@ import { useContext, useEffect, useState } from "react";
 import { useFetchData } from "../../hooks/fetchData";
 import Product from "../../common/Product/Product";
 import DataContext from "../../context/context";
-import { useLocation } from "react-router-dom";
-import axios from "axios";
+import { useLocation, useNavigate } from "react-router-dom";
 import "./grid.css";
-import { usePutData } from "../../hooks/putData";
+import { handleFilter } from "../../utils/gridUtils";
+import Title from "../../common/Title/Title";
 
-export default function Grid({ favs }) {
+export default function Grid({ arr }) {
+  const categorias = ["Aesthetic", "Oversize", "Urban"];
+  const navigate = useNavigate();
   const string = new URLSearchParams(useLocation().search).get("string");
-  const { data, setData } = useContext(DataContext);
+  const { data } = useContext(DataContext);
   const [products, setProducts] = useState([]);
   useFetchData({ func: getProducts, set: setProducts });
-  usePutData({ data: data, setData: setData, email: data.email });
-
+  useEffect(() => {
+    if (arr && !data.email) navigate("/");
+  }, [data]);
   return (
-    <div className="cont-grid">
-      {products && products.length > 1 ? (
-        products
-          .filter((elem) => {
-            if (!favs) return elem.name.includes(string || "");
-            else return data.favs.includes(elem.name);
-          })
-          .map((elem, index) => (
+    <>
+      <Title
+        h2={
+          arr
+            ? "favoritos"
+            : string &&
+              categorias.includes(
+                string.charAt(0).toUpperCase() + string.slice(1)
+              )
+            ? string.charAt(0).toUpperCase() + string.slice(1)
+            : "productos"
+        }
+      />
+      <div className="cont-grid">
+        {products && products.length > 1 ? (
+          handleFilter(products, arr, string, data).map((elem, index) => (
             <Product
               name={elem.name}
               price={elem.price}
@@ -31,9 +42,10 @@ export default function Grid({ favs }) {
               key={index}
             />
           ))
-      ) : (
-        <p>No hay productos disponibles.</p>
-      )}
-    </div>
+        ) : (
+          <p>No hay productos disponibles.</p>
+        )}
+      </div>
+    </>
   );
 }

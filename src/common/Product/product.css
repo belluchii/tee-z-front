@@ -1,4 +1,4 @@
-.cont-product {
+.cont-product-trending {
   width: 350px;
   display: flex;
   margin-top: 20px;
@@ -6,9 +6,11 @@
 
 .product {
   margin: auto;
+  background-position: center;
+  background-repeat: no-repeat;
   background-size: contain;
-  max-width: 350px;
-  height: 500px;
+  width: 320px;
+  height: 320px;
 }
 .desc-product {
   margin-top: 15px;
@@ -16,4 +18,15 @@
 }
 .h3-product {
   font-weight: 300;
+  position: absolute;
+}
+.btn-product {
+  background: none;
+  border: none;
+}
+
+.h4-product,
+.btn-product {
+  width: 100%;
+  text-align: right;
 }

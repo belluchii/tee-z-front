@@ -1,0 +1,42 @@
+.productCard {
+  display: flex;
+  width: 90%;
+  margin: 8px auto;
+  border: 1px solid #fff;
+}
+.productCardInfo {
+  width: 100%;
+  position: relative;
+}
+.btn-productCard {
+  background: #000;
+  border: 1px solid #fff;
+  padding: 0 6px;
+  position: relative;
+  z-index: 10;
+  margin: 4px;
+}
+
+.cuantity-productCard {
+  display: flex;
+  position: absolute;
+  bottom: 8px;
+  margin-left: 8px;
+}
+
+.cuantity-productCard p {
+  width: 1.5rem;
+  text-align: center;
+  line-height: 27px;
+}
+
+.price-productCard {
+  position: absolute;
+  bottom: 8px;
+  width: 95%;
+  text-align: right;
+}
+
+.name-productCard {
+  margin: 8px;
+}

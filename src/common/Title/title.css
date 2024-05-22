@@ -1,0 +1,12 @@
+.title {
+  text-align: center;
+  margin: 20px;
+  font-size: 30px;
+  position: relative;
+}
+
+.span-Title {
+  position: absolute;
+  margin-top: 10px;
+  left: 0;
+}

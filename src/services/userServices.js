@@ -7,7 +7,7 @@ export const createUser = async (userData) => {
     if (userData.password !== userData.repassword)
       return alert("las contraseñas no coinciden");
     const response = await axios.post(
-      "http://localhost:3001/api/users",
+      process.env.API_KEY + "/api/users",
       userData
     );
     alert("usuario creado correctamente");
@@ -25,7 +25,7 @@ export const validateUser = async (userData) => {
     if (!userData.password || !userData.email)
       return alert("por favor llene todos los campos");
     const response = await axios.post(
-      "http://localhost:3001/api/users/validate",
+      process.env.API_KEY + "/api/users/validate",
       userData
     );
     alert("usuario logueado correctamente");

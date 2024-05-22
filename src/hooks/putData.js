@@ -1,12 +1,14 @@
 import { useEffect } from "react";
 import axios from "axios";
-export const usePutData = ({ data, setData, email }) => {
+export const usePutData = ({ data, setData }) => {
   useEffect(() => {
     const putData = async () => {
-      if (data && email) {
+      if (data && data.email) {
         try {
-          await axios.put("http://localhost:3001/api/users/" + email, data);
-          console.log(data.cart);
+          await axios.put(
+            "http://localhost:3001/api/users/" + data.email,
+            data
+          );
         } catch (error) {
           console.error("error modificando el usuario", error);
         }

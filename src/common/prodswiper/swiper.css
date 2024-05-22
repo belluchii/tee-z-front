@@ -1,0 +1,32 @@
+.swiper {
+  width: 900px;
+}
+
+.swiper > * {
+  margin: auto;
+  padding: 5px;
+}
+
+.img-swiper {
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 200px;
+  height: 300px;
+  border: 1px solid #fff;
+  box-shadow: 1px 1px 0px #f00, -1px -1px 0px #0ef;
+}
+.title-swiper {
+  margin: 50px 0 20px;
+}
+
+@media (max-width: 1000px) {
+  .swiper {
+    width: 360px;
+  }
+
+  .img-swiper {
+    width: 160px;
+    height: 200px;
+  }
+}

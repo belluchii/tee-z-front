@@ -7,6 +7,7 @@ import Grid from "./components/Grid/Grid";
 import Index from "./components/Index";
 import Nav from "./common/nav/Nav";
 import "./App.css";
+import History from "./common/history/History";
 
 function App() {
   return (
@@ -15,7 +16,8 @@ function App() {
         <Nav />
         <Routes>
           <Route element={<Individual />} path="/products/:name" />
-          <Route element={<Grid favs={true} />} path="/products/favs" />
+          <Route element={<Grid arr={"favs"} />} path="/products/favs" />
+          <Route element={<History />} path="/products/history" />
           <Route element={<Register />} path="/register" />
           <Route element={<Grid />} path="/products" />
           <Route element={<Login />} path="/login" />

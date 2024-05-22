@@ -4,9 +4,12 @@
   color: #fff;
   text-decoration: none;
 }
-
 button:hover {
   cursor: pointer;
+}
+
+h2 {
+  font-size: 24px;
 }
 
 body {
@@ -15,6 +18,20 @@ body {
   color: #fff;
 }
 
+.border {
+  padding: 12px;
+  border: 1px solid #fff;
+}
+.w-100 {
+  width: 100%;
+}
+.border-none {
+  border: none;
+}
+
+.cursor {
+  cursor: pointer;
+}
 .flex {
   display: flex;
   justify-content: space-evenly;
@@ -23,6 +40,10 @@ body {
 
 .d-none {
   display: none;
+}
+
+.hidden {
+  color: #000;
 }
 
 button,
@@ -42,4 +63,12 @@ input,
 .img-bord {
   border: 1px solid #fff;
   padding: 4px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.m-auto {
+  margin: auto;
 }

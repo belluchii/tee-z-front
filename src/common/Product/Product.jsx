@@ -12,36 +12,43 @@ export default function Product({ name, price, src }) {
       <div className="hover-cont">
         <Link to={"/products/" + name}>
           <div className="border cont-product box-shadow">
-            <img src={src || img} className="product" alt={name} />
+            <div
+              className="product"
+              style={{ backgroundImage: `url(${src})` }}
+            />
           </div>
         </Link>
         <div className="desc-product">
-          <h3>{name || "producto no encontrado"}</h3>
-          <h3 className="h3-product">${price || 800}</h3>
-          <p>3 cuotas de {Math.floor(price / 3 + (price / 100) * 10) || 300}</p>
-        </div>
-        {data && data.favs ? (
-          !data.favs.includes(name) ? (
-            <button
-              onClick={() => setData({ ...data, favs: [...data.favs, name] })}
-            >
-              ♡
-            </button>
+          <h3 className="h3-product">{name || "producto no encontrado"}</h3>
+          {data.favs ? (
+            !data.favs.includes(name) ? (
+              <button
+                className="btn-product"
+                onClick={() => setData({ ...data, favs: [...data.favs, name] })}
+              >
+                ♡
+              </button>
+            ) : (
+              <button
+                className="btn-product"
+                onClick={() =>
+                  setData({
+                    ...data,
+                    favs: data.favs.filter((fav) => fav !== name),
+                  })
+                }
+              >
+                ♥
+              </button>
+            )
           ) : (
-            <button
-              onClick={() =>
-                setData({
-                  ...data,
-                  favs: data.favs.filter((fav) => fav !== name),
-                })
-              }
-            >
-              ♥
-            </button>
-          )
-        ) : (
-          ""
-        )}
+            <p className="hidden">a</p>
+          )}
+          <h3 className="h3-product">${price || 800} </h3>
+          <h4 className="h4-product">
+            3 cuotas de {Math.floor(price / 3 + (price / 100) * 10) || 300}
+          </h4>
+        </div>
       </div>
     </>
   );

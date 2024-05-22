@@ -1,0 +1,39 @@
+.cart {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  z-index: 20;
+  transition: 0.4s;
+  transition-timing-function: ease-in-out;
+  top: 0;
+  right: -100%;
+  background: #000;
+  height: 100%;
+  width: 400px;
+  box-shadow: -1px 0 1px #fff;
+  box-sizing: border-box;
+}
+
+.cart-true {
+  right: 0;
+}
+
+.total-cart {
+  margin-top: 40px;
+  text-align: right;
+  margin-right: 15px;
+}
+
+.btn-cart {
+  font-size: 20px;
+  padding: 0 6px;
+  margin: 20px;
+  background: none;
+  border: 1px solid #fff;
+}
+
+@media (max-width: 1000px) {
+  .cart {
+    width: 100%;
+  }
+}
