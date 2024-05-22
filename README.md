@@ -1,70 +1,71 @@
-# Getting Started with Create React App
+Tee-Z
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Proyecto con fines de estudio conectado al portfolio de Valentin Berger.
 
-## Available Scripts
+Este es un proyecto de ecommerce para la venta de remeras. El sistema permite a los usuarios ver, buscar y comprar remeras.
 
-In the project directory, you can run:
+Características
 
-### `npm start`
+Usuarios: Registro, inicio de sesión y gestión de cuentas de usuario.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Productos: Visualización, búsqueda y filtrado de remeras.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Carrito de Compras: Añadir, actualizar y eliminar productos del carrito.
 
-### `npm test`
+Pedidos: Realización y seguimiento de pedidos.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Administración: Gestión de productos, incluyendo la creación, actualización y eliminación.
 
-### `npm run build`
+Tecnologías Utilizadas
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Frontend: React.js, Axios.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Autenticación: JSON Web Tokens (JWT).
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Instalación
+Sigue estos pasos para configurar y ejecutar el proyecto en tu entorno local.
 
-### `npm run eject`
+Prerrequisitos
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Node.js (versión 18 o superior)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Clonar el repositorio
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+git clone https://github.com/belluchii/tee-z-front
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+cd tee-z-front
 
-## Learn More
+Instala las dependencias:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+npm install
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Configurar variables de entorno
 
-### Code Splitting
+Crea un archivo .env en el directorio frontend con el siguiente contenido:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+API_KEY=http://localhost:3001
 
-### Analyzing the Bundle Size
+Inicia la aplicación:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+npm start
 
-### Making a Progressive Web App
+Uso:
+Accede a la aplicación en tu navegador en http://localhost:3000.
+Regístrate o inicia sesión para comenzar a comprar remeras.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Advanced Configuration
+Contribución
+¡Contribuciones son bienvenidas! Por favor, sigue los siguientes pasos para contribuir:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Haz un fork del repositorio.
+Crea una nueva rama (git checkout -b feature/nueva-funcionalidad).
+Realiza tus cambios.
+Haz un commit de tus cambios (git commit -am 'Agrega nueva funcionalidad').
+Haz un push a la rama (git push origin feature/nueva-funcionalidad).
+Abre un Pull Request.
 
-### Deployment
+Licencia
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+Este proyecto está bajo la licencia MIT. Consulta el archivo LICENSE para más detalles.
 
-### `npm run build` fails to minify
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
