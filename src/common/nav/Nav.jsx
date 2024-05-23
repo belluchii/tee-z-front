@@ -54,15 +54,18 @@ export default function Nav() {
                             if (value === "Oversize") setValue("oversize");
                             else setValue("Oversize");
                           }}
+                          onBlur={() => setValue("")}
                         >
                           Oversize
                         </h2>
+
                         <h2
                           className="shadow cursor"
                           onClick={() => {
                             if (value === "Urban") setValue("urban");
                             else setValue("Urban");
                           }}
+                          onBlur={() => setValue("")}
                         >
                           Urban
                         </h2>
@@ -72,6 +75,7 @@ export default function Nav() {
                             if (value === "Aesthetic") setValue("aesthetic");
                             else setValue("Aesthetic");
                           }}
+                          onBlur={() => setValue("")}
                         >
                           Aesthetic
                         </h2>
