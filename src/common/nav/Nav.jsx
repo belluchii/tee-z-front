@@ -12,6 +12,7 @@ export default function Nav() {
   const [cart, setCart] = useState(false);
   const [value, setValue] = useState("");
   usePutData({ data: data, setData: setData });
+
   useEffect(() => {
     if (value !== "") navigate("/products?string=" + value);
   }, [value, navigate]);
@@ -30,6 +31,7 @@ export default function Nav() {
                   <p></p>
                   <input
                     type="text"
+                    onBlur={() => setValue("")}
                     onChange={(e) => setValue(e.target.value)}
                     className="dropdown-input cursor"
                   />
