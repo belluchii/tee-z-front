@@ -14,8 +14,11 @@ export default function Nav() {
   usePutData({ data: data, setData: setData });
 
   useEffect(() => {
-    if (value !== "") navigate("/products?string=" + value);
-  }, [value, navigate]);
+    if (value !== "") {
+      navigate("/products?string=" + value);
+      setValue("");
+    }
+  }, [value, navigate, setValue]);
 
   return (
     <>
@@ -31,7 +34,6 @@ export default function Nav() {
                   <p></p>
                   <input
                     type="text"
-                    onBlur={() => setValue("")}
                     onChange={(e) => setValue(e.target.value)}
                     className="dropdown-input cursor"
                   />
@@ -54,7 +56,6 @@ export default function Nav() {
                             if (value === "Oversize") setValue("oversize");
                             else setValue("Oversize");
                           }}
-                          onBlur={() => setValue("")}
                         >
                           Oversize
                         </h2>
@@ -65,7 +66,6 @@ export default function Nav() {
                             if (value === "Urban") setValue("urban");
                             else setValue("Urban");
                           }}
-                          onBlur={() => setValue("")}
                         >
                           Urban
                         </h2>
@@ -75,7 +75,6 @@ export default function Nav() {
                             if (value === "Aesthetic") setValue("aesthetic");
                             else setValue("Aesthetic");
                           }}
-                          onBlur={() => setValue("")}
                         >
                           Aesthetic
                         </h2>
@@ -125,20 +124,10 @@ export default function Nav() {
                   ) : (
                     <>
                       <Link to={"/login"}>
-                        <h2
-                          onClick={() => setValue("")}
-                          className="shadow cursor"
-                        >
-                          iniciar sesion
-                        </h2>
+                        <h2 className="shadow cursor">iniciar sesion</h2>
                       </Link>
                       <Link to={"/register"}>
-                        <h2
-                          onClick={() => setValue("")}
-                          className="shadow cursor"
-                        >
-                          registrarse
-                        </h2>
+                        <h2 className="shadow cursor">registrarse</h2>
                       </Link>
                     </>
                   )}
