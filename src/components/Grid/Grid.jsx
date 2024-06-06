@@ -43,7 +43,7 @@ export default function Grid({ arr }) {
             />
           ))
         ) : (
-          <p>No hay productos disponibles.</p>
+          <i class="fa-solid fa-spinner fa-spin-pulse fa-2xl shadow"></i>
         )}
       </div>
     </>

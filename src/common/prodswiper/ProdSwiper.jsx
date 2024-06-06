@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 
 export default function ProdSwiper({ h2, tag }) {
   const [prods, setProds] = useState([]);
+
   useFetchData({ func: getByTag, set: setProds, params: tag });
 
   const [width, setWidth] = useState(window.innerWidth);
@@ -25,28 +26,34 @@ export default function ProdSwiper({ h2, tag }) {
   return (
     <>
       <h2 className="text-center shadow title-swiper">{h2}</h2>
-      <Swiper
-        centeredSlides={true}
-        className="swiper "
-        slidesPerView={width > 1000 ? 3 : 2}
-        spaceBetween={30}
-        autoplay={true}
-        loop={true}
-        modules={[Autoplay]}
-      >
-        {prods &&
-          prods.length &&
-          prods.map((elem, index) => (
-            <SwiperSlide key={index}>
-              <Link to={"/products/" + elem.name}>
-                <div
-                  className="img-swiper"
-                  style={{ backgroundImage: `url(${elem.image})` }}
-                />
-              </Link>
-            </SwiperSlide>
-          ))}
-      </Swiper>
+      {prods.length === 0 ? (
+        <div className="flex mt-10">
+          <i className="fa-solid fa-2xl fa-spinner fa-spin-pulse shadow"></i>
+        </div>
+      ) : (
+        <Swiper
+          centeredSlides={true}
+          className="swiper "
+          slidesPerView={width > 1000 ? 3 : 2}
+          spaceBetween={30}
+          autoplay={true}
+          loop={true}
+          modules={[Autoplay]}
+        >
+          {prods &&
+            prods.length &&
+            prods.map((elem, index) => (
+              <SwiperSlide key={index}>
+                <Link to={"/products/" + elem.name}>
+                  <div
+                    className="img-swiper"
+                    style={{ backgroundImage: `url(${elem.image})` }}
+                  />
+                </Link>
+              </SwiperSlide>
+            ))}
+        </Swiper>
+      )}
     </>
   );
 }
