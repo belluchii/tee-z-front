@@ -5,6 +5,10 @@
   justify-content: center;
 }
 
+.mh-100 {
+  height: 60vh;
+}
+
 .product-individual {
   width: 360px;
 }

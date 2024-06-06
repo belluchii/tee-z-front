@@ -29,3 +29,11 @@ nav {
   width: 100%;
   z-index: 10;
 }
+
+li *:hover {
+  color: #000;
+}
+
+li input:hover {
+  color: #fff;
+}

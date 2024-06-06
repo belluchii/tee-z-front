@@ -26,50 +26,58 @@ export default function Individual() {
   return (
     <>
       <Title h2={""} />
-      <div className="individual">
-        <div className="product-img-individual">
-          <div className="imgs-cont-individual">
-            <div />
-            <div className="left-zoom" />
-            <div className="right-zoom" />
-          </div>
-          <img
-            src={product.image}
-            alt={product.name}
-            className="product-individual"
-          />
+      {!product.image ? (
+        <div className="flex mh-100">
+          <i className="fa-solid fa-spinner fa-2xl   fa-spin-pulse shadow"></i>
         </div>
-        <form className="info-individual">
-          <h2 className="text-center">
-            {product.name || "Nombre de la remera"}
-          </h2>
-          <div className="elem-individual">
-            ${product.price || "Precio de la remera"}
-            <p className="cuotas-individual">
-              3 cuotas de $
-              {Math.floor(product.price / 3 + (product.price / 100) * 3) || 300}
-            </p>
-          </div>
-          <div className="elem-individual">
-            <div>
-              <h3 htmlFor="colores">color</h3>
-              {product && product.color ? <p>{product.color}</p> : ""}
+      ) : (
+        <div className="individual">
+          <div className="product-img-individual">
+            <div className="imgs-cont-individual">
+              <div />
+              <div className="left-zoom" />
+              <div className="right-zoom" />
             </div>
-            <p></p>
+
+            <img
+              src={product.image}
+              alt={product.name}
+              className="product-individual"
+            />
           </div>
+          <form className="info-individual">
+            <h2 className="text-center">
+              {product.name || "Nombre de la remera"}
+            </h2>
+            <div className="elem-individual">
+              ${product.price || "Precio de la remera"}
+              <p className="cuotas-individual">
+                3 cuotas de $
+                {Math.floor(product.price / 3 + (product.price / 100) * 3) ||
+                  300}
+              </p>
+            </div>
+            <div className="elem-individual">
+              <div>
+                <h3 htmlFor="colores">color</h3>
+                {product && product.color ? <p>{product.color}</p> : ""}
+              </div>
+              <p></p>
+            </div>
 
-          <button
-            onClick={(e) => handleAddToCart(e, product, data, setData)}
-            className="border btn-individual"
-          >
-            agregar al carrito
-          </button>
+            <button
+              onClick={(e) => handleAddToCart(e, product, data, setData)}
+              className="border btn-individual"
+            >
+              agregar al carrito
+            </button>
 
-          <p className="desc-individual ">
-            {(product && product.description) || "Descripcion de la remera"}
-          </p>
-        </form>
-      </div>
+            <p className="desc-individual ">
+              {(product && product.description) || "Descripcion de la remera"}
+            </p>
+          </form>
+        </div>
+      )}
 
       <ProdSwiper
         h2={"Otros productos"}

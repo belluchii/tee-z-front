@@ -41,7 +41,7 @@ export default function Form({ children, button, func }) {
         ))}
         <button className="but-form shadow" disabled={isLoading}>
           {isLoading ? (
-            <i class="fa-solid fa-spinner fa-spin-pulse shadow"></i>
+            <i className="fa-solid fa-spinner fa-spin-pulse shadow"></i>
           ) : (
             button
           )}
