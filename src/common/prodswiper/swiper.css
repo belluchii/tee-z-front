@@ -1,36 +1,88 @@
-.swiper {
-  width: 900px;
+.ns-wrap {
+  width: 85%;
+  margin: 60px auto;
 }
 
-.swiper > * {
-  margin: auto;
-  padding: 5px;
+.ns-title {
+  font-size: 18px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 32px;
+  font-weight: 400;
 }
 
-.mt-10 {
-  margin: 50px 0;
+.ns-loading {
+  display: flex;
+  justify-content: center;
+  margin: 40px 0;
 }
 
-.img-swiper {
-  background-position: center;
-  background-size: contain;
-  background-repeat: no-repeat;
-  width: 200px;
-  height: 300px;
-  border: 1px solid #fff;
-  box-shadow: 1px 1px 0px #f00, -1px -1px 0px #0ef;
-}
-.title-swiper {
-  margin: 50px 0 20px;
+.ns-cont {
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
 
-@media (max-width: 1000px) {
-  .swiper {
-    width: 360px;
+.ns-viewport {
+  flex: 1;
+  overflow: hidden;
+}
+
+.ns-track {
+  display: flex;
+  gap: 20px;
+}
+
+.ns-slide {
+  flex-shrink: 0;
+  width: 280px;
+}
+
+.ns-arrow {
+  background: none;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  transition: border-color 0.2s;
+  flex-shrink: 0;
+  font-size: 14px;
+}
+
+.ns-arrow:hover {
+  border-color: #fff;
+}
+
+.ns-slide {
+  flex-shrink: 0;
+  width: 280px;
+}
+
+@media (max-width: 700px) {
+  .ns-viewport {
+    width: 160px;
   }
 
-  .img-swiper {
+  .ns-slide {
+    width: 160px;
+  }
+
+  .ns-slide .product-card {
+    width: 160px;
+  }
+
+  .ns-slide .product-img {
     width: 160px;
     height: 200px;
+  }
+}
+@media (max-width: 600px) {
+  .ns-wrap {
+    width: 92%;
+  }
+  .ns-slide {
+    width: 160px;
   }
 }

@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import {
   addCart,
   getStock,
@@ -5,32 +6,43 @@ import {
   removeExcedentCart,
 } from "../../utils/cartUtils";
 import "./productCard.css";
-export default function ProductCard({ elem, data, setData }) {
+
+export default function ProductCard({ elem, data, setData, showAlert }) {
+  useEffect(() => {
+    if (elem.stock < getStock(elem._id, data.cart)) {
+      const newData = { ...data, cart: [...data.cart] };
+      removeExcedentCart(newData, elem);
+      setData(newData);
+    }
+  }, [elem.stock]);
+
   return (
     <div className="productCard">
-      <img src={elem.image} alt="" width={80} />
+      <img className="productCard-img" src={elem.image} alt={elem.name} />
       <div className="productCardInfo">
-        <h2 className="name-productCard ">{elem.name}</h2>
-        <div className="cuantity-productCard">
-          <button
-            className="btn-productCard"
-            onClick={() => removeCart(elem, data, setData)}
-          >
-            -
-          </button>
-          {elem.stock < getStock(elem.name, data.cart) &&
-            removeExcedentCart(data, elem)}
-          <p className="stock-productCard">{getStock(elem.name, data.cart)}x</p>
-          <button
-            className="btn-productCard"
-            onClick={() => addCart(elem, data, setData)}
-          >
-            +
-          </button>
+        <h2 className="name-productCard">{elem.name}</h2>
+        <div className="productCard-bottom">
+          <div className="cuantity-productCard">
+            <button
+              className="btn-productCard"
+              onClick={() => removeCart(elem, data, setData)}
+            >
+              -
+            </button>
+            <p className="stock-productCard">
+              {getStock(elem._id, data.cart)}x
+            </p>
+            <button
+              className="btn-productCard"
+              onClick={() => addCart(elem, data, setData, showAlert)}
+            >
+              +
+            </button>
+          </div>
+          <h3 className="price-productCard">
+            ${elem.price * getStock(elem._id, data.cart)}
+          </h3>
         </div>
-        <h3 className="price-productCard">
-          {"$" + elem.price * getStock(elem.name, data.cart)}
-        </h3>
       </div>
     </div>
   );

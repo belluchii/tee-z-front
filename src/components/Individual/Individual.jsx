@@ -2,95 +2,144 @@ import { getOneProduct } from "../../services/productServices";
 import { handleAddToCart } from "../../utils/individualUtils";
 import { useFetchData } from "../../hooks/fetchData";
 import { usePutData } from "../../hooks/putData";
-import Footer from "../../common/footer/Footer";
 import DataContext from "../../context/context";
-import { useParams } from "react-router-dom";
-import { useContext, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { useContext, useState, useEffect } from "react";
 import "./Individual.css";
-import Title from "../../common/Title/Title";
 import ProdSwiper from "../../common/prodswiper/ProdSwiper";
+import LoadIcon from "../../common/load-icon/Load-icon";
+import useAlert from "../../hooks/useAlert";
+import Alert from "../../common/alert/Alert";
 
 export default function Individual() {
   const { data, setData } = useContext(DataContext);
   const [product, setProduct] = useState([]);
-  const { name } = useParams();
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const { alert, showAlert, closeAlert } = useAlert();
+
   useFetchData({
     func: getOneProduct,
     set: setProduct,
     state: product,
-    params: name,
+    params: id,
   });
 
-  usePutData({ data: data, setData: setData, email: data.email });
+  useEffect(() => {
+    const refetch = async () => {
+      const res = await getOneProduct(id);
+      if (res?.data) setProduct(res.data);
+    };
+    refetch();
+  }, [data.cart]);
+
+  usePutData({ data, setData, email: data.email });
+
+  const isFav = data.favs?.includes(product.name);
+
+  const toggleFav = () => {
+    if (!data.favs) return;
+    setData({
+      ...data,
+      favs: isFav
+        ? data.favs.filter((f) => f !== product.name)
+        : [...data.favs, product.name],
+    });
+  };
 
   return (
     <>
-      <Title h2={""} />
       {!product.image ? (
-        <div className="flex mh-100">
-          <i className="fa-solid fa-spinner fa-2xl   fa-spin-pulse shadow"></i>
+        <div className="ind-page">
+          <div className="ind-layout">
+            <div className="ind-img-wrap">
+              <LoadIcon n={1} width="100%" height="900px" />
+            </div>
+            <div className="ind-info">
+              <LoadIcon n={1} width="60%" height="20px" />
+              <LoadIcon n={1} width="100%" height="32px" />
+              <LoadIcon n={1} width="40%" height="24px" />
+              <LoadIcon n={1} width="100%" height="1px" />
+              <LoadIcon n={1} width="80%" height="16px" />
+              <LoadIcon n={1} width="100%" height="48px" />
+            </div>
+          </div>
         </div>
       ) : (
-        <div className="individual">
-          <div className="product-img-individual">
-            <div className="imgs-cont-individual">
-              <div />
-              <div className="left-zoom" />
-              <div className="right-zoom" />
+        <div className="ind-page">
+          <button className="ind-back" onClick={() => navigate(-1)}>
+            <i className="fa-solid fa-chevron-left" />
+            <span>volver</span>
+          </button>
+
+          <div className="ind-layout">
+            <div className="ind-img-wrap">
+              <img src={product.image} alt={product.name} className="ind-img" />
             </div>
 
-            <img
-              src={product.image}
-              alt={product.name}
-              className="product-individual"
-            />
-          </div>
-          <form className="info-individual">
-            <h2 className="text-center">
-              {product.name || "Nombre de la remera"}
-            </h2>
-            <div className="elem-individual">
-              ${product.price || "Precio de la remera"}
-              <p className="cuotas-individual">
-                3 cuotas de $
-                {Math.floor(product.price / 3 + (product.price / 100) * 3) ||
-                  300}
-              </p>
-            </div>
-            <div className="elem-individual">
-              <div>
-                <h3 htmlFor="colores">color</h3>
-                {product && product.color ? <p>{product.color}</p> : ""}
+            <div className="ind-info">
+              <p className="ind-tag">{product.tags?.[0]}</p>
+              <h1 className="ind-name">{product.name}</h1>
+
+              <div className="ind-price-wrap">
+                <p className="ind-price">${product.price}</p>
+                <p className="ind-installments">
+                  3 x $
+                  {Math.floor(product.price / 3 + (product.price / 100) * 3)}
+                </p>
               </div>
-              <p></p>
+
+              <div className="ind-divider" />
+
+              <div className="ind-meta">
+                <div className="ind-meta-item">
+                  <span className="ind-meta-label">color</span>
+                  <span className="ind-meta-value">{product.color}</span>
+                </div>
+                {product.size?.length > 0 && (
+                  <div className="ind-meta-item">
+                    <span className="ind-meta-label">tallas</span>
+                    <div className="ind-sizes">
+                      {product.size.map((s, i) => (
+                        <span key={i} className="ind-size">
+                          {s}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              <div className="ind-divider" />
+
+              <div className="ind-actions">
+                <button
+                  className="ind-btn-cart"
+                  onClick={(e) =>
+                    handleAddToCart(e, product, data, setData, showAlert)
+                  }
+                  disabled={product.stock <= 0}
+                >
+                  {product.stock <= 0 ? "sin stock" : "agregar al carrito"}
+                </button>
+                {data.favs && (
+                  <button className="ind-btn-fav" onClick={toggleFav}>
+                    {isFav ? "♥" : "♡"}
+                  </button>
+                )}
+              </div>
+
+              <p className="ind-desc">{product.description}</p>
             </div>
-
-            <button
-              onClick={(e) => handleAddToCart(e, product, data, setData)}
-              className="border btn-individual"
-            >
-              agregar al carrito
-            </button>
-
-            <p className="desc-individual ">
-              {(product && product.description) || "Descripcion de la remera"}
-            </p>
-          </form>
+          </div>
         </div>
       )}
 
-      <ProdSwiper
-        h2={"Otros productos"}
-        tag={
-          product && product.tags && product.tags[0] === "Oversize"
-            ? "Urban"
-            : "Oversize"
-        }
-      />
-      <Footer />
+      <ProdSwiper h2="Productos Recomendados" tag="Parkas" />
+
+      {alert && (
+        <Alert message={alert.message} type={alert.type} onClose={closeAlert} />
+      )}
     </>
   );
 }
-/*
-        
-*/

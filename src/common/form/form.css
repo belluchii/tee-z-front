@@ -1,45 +1,98 @@
+.form-page {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .cont-form {
-  border: 1px solid #fff;
-  width: 600px;
-  margin: 20vh auto;
+  width: 480px;
+  border: 1px solid #fff7;
+  padding: 48px;
   display: flex;
   flex-direction: column;
+  gap: 20px;
 }
 
-.h3-form {
-  margin: 12px 0;
+.form-title {
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: 4px;
+  text-transform: uppercase;
   text-align: center;
-  font-weight: 300;
-  font-size: 24px;
 }
 
-.but-form {
-  border: 1px solid #fff;
-  padding: 12px;
-  margin: 30px auto;
-  background: none;
-  font-weight: 300;
-  font-size: 24px;
+.form-divider {
+  width: 100%;
+  height: 1px;
+  background: #fff7;
+}
+
+.input-parent {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.input-label {
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #fff;
 }
 
 .input-form {
-  padding: 12px;
-  border: 1px solid #fff;
-  background: none;
-  width: 90%;
-  margin: auto;
-  display: block;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #fff7;
+  color: #fff;
+  font-size: 15px;
+  padding: 10px 0;
+  outline: none;
+  transition: border-color 0.2s;
+  width: 100%;
+}
+
+.input-form:focus {
+  border-bottom-color: #fff;
 }
 
 .input-form::placeholder {
-  font-size: 18px;
+  color: #fff7;
+  font-size: 14px;
 }
 
-@media (max-width: 700px) {
+.but-form {
+  background: #fff;
+  color: #000;
+  border: none;
+  padding: 14px;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 8px;
+  border: 1px solid #fff;
+}
+
+.but-form:hover {
+  background: #000;
+  color: #fff;
+}
+
+.but-form:disabled {
+  background: #000;
+  cursor: not-allowed;
+}
+
+@media (max-width: 600px) {
   .cont-form {
-    width: 350px;
-  }
-  .input-form {
-    width: 80%;
+    width: 92vw;
+    padding: 32px 24px;
   }
 }

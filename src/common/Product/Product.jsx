@@ -1,53 +1,54 @@
 import DataContext from "../../context/context";
 import { Link } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import "./product.css";
-export default function Product({ name, price, src }) {
+
+export default function Product({ name, price, src, id }) {
   const { data, setData } = useContext(DataContext);
+  const [hovered, setHovered] = useState(false);
+
+  const isFav = data.favs?.includes(name);
+
+  const toggleFav = () => {
+    if (!data.favs) return;
+    setData({
+      ...data,
+      favs: isFav ? data.favs.filter((f) => f !== name) : [...data.favs, name],
+    });
+  };
 
   return (
-    <>
-      <div className="hover-cont">
-        <Link to={"/products/" + name}>
-          <div className="border cont-product box-shadow">
-            <div
-              className="product"
-              style={{ backgroundImage: `url(${src})` }}
-            />
+    <div
+      className="product-card"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      <Link to={"/products/" + id} className="product-img-wrap">
+        <div
+          className="product-img"
+          style={{ backgroundImage: `url(${src})` }}
+        />
+        <div className={`product-overlay ${hovered ? "open" : ""}`}>
+          <span className="product-overlay-text">ver producto</span>
+        </div>
+      </Link>
+
+      <div className="product-info">
+        <p className="product-name">{name || "producto no encontrado"}</p>
+        <div className="product-pricing">
+          <div>
+            <p className="product-price">${price || 800}</p>
+            <p className="product-installments">
+              3 x ${Math.floor(price / 3 + (price / 100) * 10) || 300}
+            </p>
           </div>
-        </Link>
-        <div className="desc-product">
-          <h3 className="h3-product">{name || "producto no encontrado"}</h3>
-          {data.favs ? (
-            !data.favs.includes(name) ? (
-              <button
-                className="btn-product"
-                onClick={() => setData({ ...data, favs: [...data.favs, name] })}
-              >
-                ♡
-              </button>
-            ) : (
-              <button
-                className="btn-product"
-                onClick={() =>
-                  setData({
-                    ...data,
-                    favs: data.favs.filter((fav) => fav !== name),
-                  })
-                }
-              >
-                ♥
-              </button>
-            )
-          ) : (
-            <p className="hidden">a</p>
+          {data.favs && (
+            <button className="product-fav" onClick={toggleFav}>
+              {isFav ? "♥" : "♡"}
+            </button>
           )}
-          <h3 className="h3-product">${price || 800} </h3>
-          <h4 className="h4-product">
-            3 cuotas de {Math.floor(price / 3 + (price / 100) * 10) || 300}
-          </h4>
         </div>
       </div>
-    </>
+    </div>
   );
 }

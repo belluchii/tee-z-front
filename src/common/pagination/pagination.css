@@ -1,0 +1,37 @@
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin: 40px 0;
+}
+
+.pag-btn {
+  background: none;
+  border: 1px solid #fff7;
+  color: #fff;
+  width: 36px;
+  height: 36px;
+  font-size: 13px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition:
+    border-color 0.2s,
+    background 0.2s,
+    color 0.2s;
+}
+
+.pag-btn:hover:not(:disabled) {
+  border-color: #fff;
+}
+
+.pag-btn:disabled {
+  opacity: 0.2;
+  cursor: not-allowed;
+}
+
+.pag-active {
+  background: #fff;
+  color: #000;
+  border-color: #fff;
+}

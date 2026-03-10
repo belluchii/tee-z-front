@@ -6,8 +6,8 @@ export const usePutData = ({ data, setData }) => {
       if (data && data.email) {
         try {
           await axios.put(
-            "http://localhost:3001/api/users/" + data.email,
-            data
+            process.env.REACT_APP_API_KEY + "/api/users/" + data.email,
+            data,
           );
         } catch (error) {
           console.error("error modificando el usuario", error);

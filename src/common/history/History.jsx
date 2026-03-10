@@ -1,61 +1,66 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 import DataContext from "../../context/context";
 import { apilarProductos } from "../../utils/historyUtils";
 import { useFetchMultipleData } from "../../hooks/fetchData";
 import { getOneProduct } from "../../services/productServices";
 import Title from "../Title/Title";
+import "./history.css";
 
 export default function History() {
   const { data } = useContext(DataContext);
-  const [product, setProduct] = useState([]);
-  const arr = [...new Set(data.history)];
+  const [products, setProducts] = useState([]);
+  const navigate = useNavigate();
+
+  const uniqueHistoryIds = useMemo(
+    () => [...new Set(data.history)],
+    [data.history],
+  );
+
   useFetchMultipleData({
     func: getOneProduct,
-    set: setProduct,
-    arr: arr,
+    set: setProducts,
+    arr: uniqueHistoryIds,
   });
-  return (
-    <>
-      <Title h2={"Historial"} />
-      <div className="cont-grid">
-        {data.history
-          ? apilarProductos(data.history).map((elem, index) => (
-              <div key={index} className="productCard w-100">
-                <div className="flex">
-                  <img
-                    className="m-auto"
-                    width={80}
-                    src={
-                      product.length >= 1 &&
-                      product
-                        .filter((prod) => elem.name === prod.name)[0]
-                        .image.toString()
-                    }
-                    alt={elem.name}
-                  />
-                </div>
 
-                <div className="productCardInfo">
-                  <h2 className="name-productCard">{elem.name}</h2>
-                  <div className="cuantity-productCard">
-                    <p>{elem.stock}x</p>
-                  </div>
-                  <h3 className="price-productCard">
-                    $
-                    {elem.stock *
-                      (product.length >= 1 &&
-                      product.filter((prod) => elem.name === prod.name)[0]
-                        ? product.filter((prod) => elem.name === prod.name)[0]
-                            .price
-                        : 200)}
+  const getProduct = (id) => products.find((prod) => prod._id === id);
+
+  return (
+    <div className="history-wrapper">
+      <Title h2={"Historial"} />
+      <div className="history-grid">
+        {data.history?.length >= 1 ? (
+          apilarProductos(data.history).map((elem, index) => {
+            const prod = getProduct(elem._id);
+            return (
+              <div
+                key={index}
+                className="history-card"
+                onClick={() => navigate(`/products/${elem._id}`)}
+              >
+                <img
+                  className="history-card-img"
+                  src={prod?.image}
+                  alt={prod?.name}
+                />
+                <div className="history-card-info">
+                  <h2 className="history-card-name">{prod?.name}</h2>
+                  <p className="history-card-quantity">{elem.stock} unidades</p>
+                  <h3 className="history-card-price">
+                    ${prod ? elem.stock * prod.price : 0}
                   </h3>
                 </div>
               </div>
-            ))
-          : data.email
-          ? "aun no realizaste ninguna compra"
-          : "logueate para poder ver tu historial"}
+            );
+          })
+        ) : (
+          <p className="history-empty">
+            {data.email
+              ? "aun no realizaste ninguna compra"
+              : "logueate para ver tu historial"}
+          </p>
+        )}
       </div>
-    </>
+    </div>
   );
 }

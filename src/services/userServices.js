@@ -1,37 +1,45 @@
 import axios from "axios";
 
-export const createUser = async (userData) => {
+export const createUser = async (userData, showAlert) => {
   try {
-    if (!userData.password || !userData.repassword || !userData.email)
-      return alert("por favor llene todos los campos");
-    if (userData.password !== userData.repassword)
-      return alert("las contraseñas no coinciden");
+    if (!userData.password || !userData.repassword || !userData.email) {
+      showAlert("por favor llene todos los campos", "warning");
+      return;
+    }
+    if (userData.password !== userData.repassword) {
+      showAlert("las contraseñas no coinciden", "warning");
+      return;
+    }
     const response = await axios.post(
       process.env.REACT_APP_API_KEY + "/api/users",
-      userData
+      userData,
     );
-    alert("usuario creado correctamente");
-
-    return response; // Devolver los datos del usuario creado
+    showAlert("usuario creado correctamente", "success");
+    return response;
   } catch (error) {
-    alert(
-      "El email ya se encuentra en uso por favor intente de nuevo con uno diferente"
+    showAlert(
+      "el email ya se encuentra en uso, intente con uno diferente",
+      "error",
     );
   }
 };
 
-export const validateUser = async (userData) => {
+export const validateUser = async (userData, showAlert) => {
   try {
-    if (!userData.password || !userData.email)
-      return alert("por favor llene todos los campos");
+    if (!userData.password || !userData.email) {
+      showAlert("por favor llene todos los campos", "warning");
+      return;
+    }
     const response = await axios.post(
       process.env.REACT_APP_API_KEY + "/api/users/validate",
-      userData
+      userData,
     );
-    alert("usuario logueado correctamente");
-
-    return response; // Devolver los datos del usuario validado
+    showAlert("usuario logueado correctamente", "success");
+    return response;
   } catch (error) {
-    alert("Error al iniciar sesion por favor reingrese sus datos");
+    showAlert(
+      "error al iniciar sesión, por favor reingrese sus datos",
+      "error",
+    );
   }
 };

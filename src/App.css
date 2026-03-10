@@ -1,7 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500&display=swap");
+
 * {
   margin: 0;
   padding: 0;
   color: #fff;
+  font-family: "Bebas Neue";
   text-decoration: none;
 }
 button:hover {
@@ -44,20 +47,6 @@ body {
 
 .hidden {
   color: #000;
-}
-
-button,
-input,
-* {
-  font-family: "Alegreya SC", serif;
-}
-
-.shadow {
-  text-shadow: 1px 1px 0px #f00, -1px -1px 0px #0ef;
-}
-
-.box-shadow {
-  box-shadow: 1px 1px 0px #f00, -1px -1px 0px #0ef;
 }
 
 .img-bord {

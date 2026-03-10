@@ -8,6 +8,7 @@ import Index from "./components/Index";
 import Nav from "./common/nav/Nav";
 import "./App.css";
 import History from "./common/history/History";
+import Footer from "./common/footer/Footer";
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
       <div className="App">
         <Nav />
         <Routes>
-          <Route element={<Individual />} path="/products/:name" />
+          <Route element={<Individual />} path="/products/:id" />
           <Route element={<Grid arr={"favs"} />} path="/products/favs" />
           <Route element={<History />} path="/products/history" />
           <Route element={<Register />} path="/register" />
@@ -23,6 +24,7 @@ function App() {
           <Route element={<Login />} path="/login" />
           <Route element={<Index />} path="/" />
         </Routes>
+        <Footer />
       </div>
     </DataProvider>
   );

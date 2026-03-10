@@ -1,42 +1,99 @@
 .productCard {
   display: flex;
-  width: 90%;
-  margin: 8px auto;
-  border: 1px solid #fff;
+  width: 95%;
+  margin: 10px auto;
+  background-color: #000;
+  border: 1px solid #1a1a1a;
+  transition: border-color 0.3s ease;
+  overflow: hidden;
+  padding: 10px;
 }
+
+.productCard:hover {
+  border-color: #fff;
+}
+
+.productCard-img {
+  width: 100px;
+  min-width: 100px;
+  height: 100%;
+  min-height: 100px;
+  object-fit: cover;
+  display: block;
+  align-self: stretch;
+  filter: grayscale(20%);
+  transition: filter 0.3s ease;
+}
+
+.productCard:hover .productCard-img {
+  filter: grayscale(0%);
+}
+
 .productCardInfo {
   width: 100%;
-  position: relative;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
 }
-.btn-productCard {
-  background: #000;
-  border: 1px solid #fff;
-  padding: 0 6px;
-  position: relative;
-  z-index: 10;
-  margin: 4px;
+
+.name-productCard {
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  color: #fff;
+  margin: 0;
+  line-height: 1.2;
+  word-break: break-word;
+}
+
+.productCard-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .cuantity-productCard {
   display: flex;
-  position: absolute;
-  bottom: 8px;
-  margin-left: 8px;
+  align-items: center;
+  gap: 4px;
 }
 
-.cuantity-productCard p {
+.stock-productCard {
+  font-weight: 300;
+  font-size: 0.85rem;
+  color: #888;
   width: 1.5rem;
   text-align: center;
-  line-height: 27px;
+  margin: 0;
+}
+
+.btn-productCard {
+  background: #000;
+  border: 1px solid #333;
+  color: #fff;
+  font-size: 1rem;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.btn-productCard:hover {
+  background: #fff;
+  color: #000;
+  border-color: #fff;
 }
 
 .price-productCard {
-  position: absolute;
-  bottom: 8px;
-  width: 95%;
-  text-align: right;
-}
-
-.name-productCard {
-  margin: 8px;
+  font-weight: 500;
+  font-size: 1rem;
+  color: #fff;
+  margin: 0;
 }
