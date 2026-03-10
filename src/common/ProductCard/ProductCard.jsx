@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useCallback } from "react";
 import {
   addCart,
   getStock,
@@ -8,13 +8,17 @@ import {
 import "./productCard.css";
 
 export default function ProductCard({ elem, data, setData, showAlert }) {
-  useEffect(() => {
+  const checkStock = useCallback(() => {
     if (elem.stock < getStock(elem._id, data.cart)) {
       const newData = { ...data, cart: [...data.cart] };
       removeExcedentCart(newData, elem);
       setData(newData);
     }
-  }, [elem.stock]);
+  }, [elem, data, setData]);
+
+  useEffect(() => {
+    checkStock();
+  }, [checkStock]);
 
   return (
     <div className="productCard">

@@ -4,7 +4,7 @@ import { useFetchData } from "../../hooks/fetchData";
 import { usePutData } from "../../hooks/putData";
 import DataContext from "../../context/context";
 import { useParams, useNavigate } from "react-router-dom";
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState, useEffect, useCallback } from "react";
 import "./Individual.css";
 import ProdSwiper from "../../common/prodswiper/ProdSwiper";
 import LoadIcon from "../../common/load-icon/Load-icon";
@@ -21,17 +21,17 @@ export default function Individual() {
   useFetchData({
     func: getOneProduct,
     set: setProduct,
-    state: product,
     params: id,
   });
 
+  const refetch = useCallback(async () => {
+    const res = await getOneProduct(id);
+    if (res?.data) setProduct(res.data);
+  }, [id]);
+
   useEffect(() => {
-    const refetch = async () => {
-      const res = await getOneProduct(id);
-      if (res?.data) setProduct(res.data);
-    };
     refetch();
-  }, [data.cart]);
+  }, [refetch, data.cart]);
 
   usePutData({ data, setData, email: data.email });
 

@@ -1,5 +1,12 @@
 import { getProducts, getTags } from "../../services/productServices";
-import { useContext, useEffect, useState, useMemo, useRef } from "react";
+import {
+  useContext,
+  useEffect,
+  useState,
+  useMemo,
+  useRef,
+  useCallback,
+} from "react";
 import Product from "../../common/Product/Product";
 import DataContext from "../../context/context";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -16,7 +23,6 @@ export default function Grid({ arr }) {
 
   const { data } = useContext(DataContext);
   const [products, setProducts] = useState([]);
-  const [categories, setCategories] = useState([]);
   const [page, setPage] = useState(1);
   const [filters, setFilters] = useState({
     categories: [],
@@ -24,18 +30,19 @@ export default function Grid({ arr }) {
     priceRange: [0, 50000],
   });
 
-  const handleFilter = (newFilters) => {
+  const handleFilter = useCallback((newFilters) => {
     setFilters(newFilters);
     setPage(1);
-  };
+  }, []);
 
   const [isLoading, withLoading] = useIsLoading();
   const debounceRef = useRef(null);
+
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [page]);
 
-  useFetchData({ func: getTags, set: setCategories });
+  useFetchData({ func: getTags, set: () => {} });
 
   const string = useMemo(
     () => new URLSearchParams(location.search).get("string"),
@@ -63,7 +70,14 @@ export default function Grid({ arr }) {
     setPage(1);
   }, [string]);
 
-  const filtersKey = JSON.stringify({ ...filters, string, page });
+  const { categories: filterCats, colors: filterColors, priceRange } = filters;
+  const filtersKey = JSON.stringify({
+    filterCats,
+    filterColors,
+    priceRange,
+    string,
+    page,
+  });
 
   useEffect(() => {
     if (debounceRef.current) clearTimeout(debounceRef.current);
@@ -72,10 +86,10 @@ export default function Grid({ arr }) {
       withLoading(async () => {
         const res = await getProducts({
           string: string || "",
-          categories: filters.categories,
-          colors: filters.colors,
-          priceMin: filters.priceRange[0],
-          priceMax: filters.priceRange[1],
+          categories: filterCats,
+          colors: filterColors,
+          priceMin: priceRange[0],
+          priceMax: priceRange[1],
           page,
           limit: 12,
         });
@@ -84,11 +98,11 @@ export default function Grid({ arr }) {
     }, 400);
 
     return () => clearTimeout(debounceRef.current);
-  }, [filtersKey]);
+  }, [filtersKey]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (arr && !data.email) navigate("/");
-  }, [data, navigate, arr]);
+  }, [arr, data.email, navigate]);
 
   const displayProducts =
     arr && data[arr]

@@ -11,7 +11,7 @@ export const useFetchData = ({ func, set, params = null }) => {
       }
     };
     fetchData();
-  }, [params]);
+  }, [params, func, set]);
 };
 
 export const useFetchMultipleData = ({ func, set, arr }) => {
@@ -26,7 +26,6 @@ export const useFetchMultipleData = ({ func, set, arr }) => {
           const response = await func(params);
           return response.data;
         });
-
         const results = await Promise.all(promises);
         set(results);
       } catch (error) {
@@ -35,5 +34,5 @@ export const useFetchMultipleData = ({ func, set, arr }) => {
     };
 
     fetchMultipleData();
-  }, [arrKey]);
+  }, [arrKey, func, set]); // eslint-disable-line react-hooks/exhaustive-deps
 };

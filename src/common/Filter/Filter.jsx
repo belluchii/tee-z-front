@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import "./filter.css";
 import RangeSlider from "../range-slider/RangeSlider";
 
@@ -49,13 +49,15 @@ export default function Filter({ onFilter, filters: externalFilters }) {
   );
   const [mobileOpen, setMobileOpen] = useState(false);
 
+  const externalFiltersKey = JSON.stringify(externalFilters);
+
   useEffect(() => {
     if (externalFilters) {
       setSelectedCats(externalFilters.categories || []);
       setSelectedColors(externalFilters.colors || []);
       setPriceRange(externalFilters.priceRange || [0, 50000]);
     }
-  }, [JSON.stringify(externalFilters)]);
+  }, [externalFiltersKey]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const toggle = (section) =>
     setOpenSections(
@@ -64,43 +66,58 @@ export default function Filter({ onFilter, filters: externalFilters }) {
         : [...openSections, section],
     );
 
-  const toggleCat = (cat) => {
-    const updated = selectedCats.includes(cat)
-      ? selectedCats.filter((c) => c !== cat)
-      : [...selectedCats, cat];
-    setSelectedCats(updated);
-    onFilter?.({ categories: updated, colors: selectedColors, priceRange });
-  };
+  const toggleCat = useCallback(
+    (cat) => {
+      setSelectedCats((prev) => {
+        const updated = prev.includes(cat)
+          ? prev.filter((c) => c !== cat)
+          : [...prev, cat];
+        onFilter?.({ categories: updated, colors: selectedColors, priceRange });
+        return updated;
+      });
+    },
+    [onFilter, selectedColors, priceRange],
+  );
 
-  const toggleColor = (color) => {
-    const updated = selectedColors.includes(color)
-      ? selectedColors.filter((c) => c !== color)
-      : [...selectedColors, color];
-    setSelectedColors(updated);
-    onFilter?.({ categories: selectedCats, colors: updated, priceRange });
-  };
+  const toggleColor = useCallback(
+    (color) => {
+      setSelectedColors((prev) => {
+        const updated = prev.includes(color)
+          ? prev.filter((c) => c !== color)
+          : [...prev, color];
+        onFilter?.({ categories: selectedCats, colors: updated, priceRange });
+        return updated;
+      });
+    },
+    [onFilter, selectedCats, priceRange],
+  );
 
-  const handlePrice = (val, index) => {
-    const updated = [...priceRange];
-    if (index === 0) {
-      updated[0] = Math.min(val, priceRange[1] - 500);
-    } else {
-      updated[1] = Math.max(val, priceRange[0] + 500);
-    }
-    setPriceRange(updated);
-    onFilter?.({
-      categories: selectedCats,
-      colors: selectedColors,
-      priceRange: updated,
-    });
-  };
+  const handlePrice = useCallback(
+    (val, index) => {
+      setPriceRange((prev) => {
+        const updated = [...prev];
+        if (index === 0) {
+          updated[0] = Math.min(val, prev[1] - 500);
+        } else {
+          updated[1] = Math.max(val, prev[0] + 500);
+        }
+        onFilter?.({
+          categories: selectedCats,
+          colors: selectedColors,
+          priceRange: updated,
+        });
+        return updated;
+      });
+    },
+    [onFilter, selectedCats, selectedColors],
+  );
 
-  const clearAll = () => {
+  const clearAll = useCallback(() => {
     setSelectedCats([]);
     setSelectedColors([]);
     setPriceRange([0, 50000]);
     onFilter?.({ categories: [], colors: [], priceRange: [0, 50000] });
-  };
+  }, [onFilter]);
 
   const hasFilters =
     selectedCats.length > 0 ||
@@ -214,7 +231,7 @@ export default function Filter({ onFilter, filters: externalFilters }) {
       <div className="filter-wrap">{filterContent}</div>
 
       <button className="filter-mobile-btn" onClick={() => setMobileOpen(true)}>
-        <i className="fa-solid fa-sliders fa-black" style={{ color: "#000" }} />
+        <i className="fa-solid fa-sliders" />
         <span className="filter-span-btn">filtros</span>
         {hasFilters && (
           <div className="filter-mobile-badge">

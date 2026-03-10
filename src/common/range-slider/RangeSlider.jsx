@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useRef } from "react";
 import "./range-slider.css";
 
 export default function RangeSlider({
@@ -9,7 +9,6 @@ export default function RangeSlider({
   onChange,
 }) {
   const trackRef = useRef(null);
-  const [_dragging, setDragging] = useState(false);
 
   const getPercent = (val) => ((val - min) / (max - min)) * 100;
 
@@ -24,12 +23,9 @@ export default function RangeSlider({
   };
 
   const handleMouseDown = (e) => {
-    setDragging(true);
     onChange(getValueFromX(e.clientX));
-
     const onMove = (e) => onChange(getValueFromX(e.clientX));
     const onUp = () => {
-      setDragging(false);
       window.removeEventListener("mousemove", onMove);
       window.removeEventListener("mouseup", onUp);
     };
@@ -37,7 +33,7 @@ export default function RangeSlider({
     window.addEventListener("mouseup", onUp);
   };
 
-  const handleTouchStart = (e) => {
+  const handleTouchStart = () => {
     const onMove = (e) => onChange(getValueFromX(e.touches[0].clientX));
     const onEnd = () => {
       window.removeEventListener("touchmove", onMove);
