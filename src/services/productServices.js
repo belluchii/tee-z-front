@@ -12,7 +12,7 @@ export const getProducts = async ({
   limit = 12,
 } = {}) => {
   try {
-    return await axios.get(BASE, {
+    return await axios.get(BASE + "/search", {
       params: {
         name: string || "",
         tags: JSON.stringify(categories || []),

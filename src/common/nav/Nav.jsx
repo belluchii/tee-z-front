@@ -1,6 +1,6 @@
 import DataContext from "../../context/context";
 import { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import Cart from "../cart/Cart";
 import Alert from "../../common/alert/Alert";
 import useAlert from "../../hooks/useAlert";
@@ -9,6 +9,7 @@ import "./nav.css";
 export default function Navbar({ categories = [] }) {
   const { data, setData } = useContext(DataContext);
   const navigate = useNavigate();
+  const location = useLocation();
   const { alert, showAlert, closeAlert } = useAlert();
   const [cart, setCart] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
@@ -57,21 +58,21 @@ export default function Navbar({ categories = [] }) {
     { name: "Chocolate", hex: "#3d1f0f" },
   ];
 
-  const handleSearch = (e) => {
-    if (e.key === "Enter" && searchVal.trim()) {
-      navigate(`/products?string=${encodeURIComponent(searchVal.trim())}`);
-      setSearchVal("");
-      setSearchOpen(false);
-    }
+  const handleSearchChange = (e) => {
+    const val = e.target.value;
+    setSearchVal(val);
+    if (location.pathname !== "/products") navigate("/products");
+    const params = new URLSearchParams(location.search);
+    params.set("string", val);
+    navigate(`/products?${params.toString()}`);
   };
 
-  const handleMobileSearch = (e) => {
-    if (e.key === "Enter" && searchVal.trim()) {
-      navigate(`/products?string=${encodeURIComponent(searchVal.trim())}`);
-      setSearchVal("");
-      setMobileSearchOpen(false);
-      setMenuOpen(false);
-    }
+  const handleMobileSearchChange = (e) => {
+    const val = e.target.value;
+    setSearchVal(val);
+    const params = new URLSearchParams(location.search);
+    params.set("string", val);
+    navigate(`/products?${params.toString()}`);
   };
 
   return (
@@ -147,12 +148,11 @@ export default function Navbar({ categories = [] }) {
           </div>
 
           <div className="nav-right">
-            <div
-              className="nav-item"
-              onMouseEnter={() => setSearchOpen(true)}
-              onMouseLeave={() => setSearchOpen(false)}
-            >
-              <i className="search-btn fa-solid fa-magnifying-glass nav-icon" />
+            <div className="nav-item nav-search-wrap">
+              <i
+                className="search-btn fa-solid fa-magnifying-glass nav-icon"
+                onClick={() => setSearchOpen((prev) => !prev)}
+              />
               <div
                 className={`nav-dropdown search-dropdown ${searchOpen ? "open" : ""}`}
               >
@@ -161,8 +161,7 @@ export default function Navbar({ categories = [] }) {
                   type="text"
                   placeholder="buscar..."
                   value={searchVal}
-                  onChange={(e) => setSearchVal(e.target.value)}
-                  onKeyDown={handleSearch}
+                  onChange={handleSearchChange}
                   className="search-overlay-input"
                 />
               </div>
@@ -338,8 +337,7 @@ export default function Navbar({ categories = [] }) {
               type="text"
               placeholder="buscar..."
               value={searchVal}
-              onChange={(e) => setSearchVal(e.target.value)}
-              onKeyDown={handleMobileSearch}
+              onChange={handleMobileSearchChange}
               className="mobile-search-input"
             />
           </div>
