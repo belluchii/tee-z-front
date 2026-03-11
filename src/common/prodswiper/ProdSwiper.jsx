@@ -100,6 +100,9 @@ export default function ProdSwiper({ h2, tag }) {
               {items.map((elem, i) => (
                 <div key={i} className="ns-slide">
                   <Product
+                    onClick={() => {
+                      window.scrollTo({ top: 0, behavior: "smooth" });
+                    }}
                     name={elem.name}
                     price={elem.price}
                     src={elem.image}

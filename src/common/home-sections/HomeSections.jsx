@@ -6,22 +6,22 @@ export default function HomeSections() {
   const categories = [
     {
       label: "Puffer & Quilted",
-      slug: "puffer",
+      slug: "Puffer & Quilted",
       img: "https://images.asos-media.com/products/asos-design-rubberised-bomber-rain-jacket-in-khaki/203658411-4?$n_1920w$&wid=1926&fit=constrain",
     },
     {
       label: "Trench Coats",
-      slug: "trench",
+      slug: "Trench Coats",
       img: "https://images.asos-media.com/products/new-look-trench-coat-in-camel/204351106-4?$n_1920w$&wid=1926&fit=constrain",
     },
     {
       label: "Leather & Biker",
-      slug: "leather",
+      slug: "Leather & Biker",
       img: "https://images.asos-media.com/products/asos-design-tall-ultimate-faux-leather-biker-jacket-in-black/204066187-4?$n_1920w$&wid=1926&fit=constrain",
     },
     {
       label: "Fleece & Fur",
-      slug: "fleece",
+      slug: "Fleece & Fur",
       img: "https://images.asos-media.com/products/stradivarius-double-breasted-wool-coat-in-grey/203958042-4?$n_1920w$&wid=1926&fit=constrain",
     },
   ];
@@ -50,25 +50,24 @@ export default function HomeSections() {
   ];
 
   const colors = [
-    { label: "Black", hex: "#111", slug: "black" },
-    { label: "White", hex: "#f5f5f5", slug: "white" },
-    { label: "Brown", hex: "#6b3f2a", slug: "brown" },
-    { label: "Cream", hex: "#f0e6d0", slug: "cream" },
-    { label: "Beige", hex: "#d4b896", slug: "beige" },
-    { label: "Camel", hex: "#c19a6b", slug: "camel" },
-    { label: "Navy", hex: "#1a2a4a", slug: "navy" },
-    { label: "Blue", hex: "#3a6bc4", slug: "blue" },
-    { label: "Green", hex: "#3a7a4a", slug: "green" },
-    { label: "Pink", hex: "#e8879a", slug: "pink" },
-    { label: "Purple", hex: "#6a3a8a", slug: "purple" },
-    { label: "Red", hex: "#c03030", slug: "red" },
+    { label: "Black", hex: "#111", slug: "Black" },
+    { label: "White", hex: "#f5f5f5", slug: "White" },
+    { label: "Brown", hex: "#6b3f2a", slug: "Brown" },
+    { label: "Cream", hex: "#f0e6d0", slug: "Cream" },
+    { label: "Beige", hex: "#d4b896", slug: "Beige" },
+    { label: "Camel", hex: "#c19a6b", slug: "Camel" },
+    { label: "Navy", hex: "#1a2a4a", slug: "Navy" },
+    { label: "Blue", hex: "#3a6bc4", slug: "Blue" },
+    { label: "Green", hex: "#3a7a4a", slug: "Green" },
+    { label: "Pink", hex: "#e8879a", slug: "Pink" },
+    { label: "Purple", hex: "#6a3a8a", slug: "Purple" },
+    { label: "Red", hex: "#c03030", slug: "Red" },
   ];
 
   return (
     <main className="hs-wrap">
-      {/* BANNERS DOBLES */}
       <div className="hs-banners">
-        <Link to="/products?string=trench" className="hs-banner">
+        <Link to="/products?category=Parkas" className="hs-banner">
           <LoadIcon
             n={1}
             width="100%"
@@ -86,7 +85,7 @@ export default function HomeSections() {
             <i className="fa-solid fa-arrow-right" />
           </div>
         </Link>
-        <Link to="/products?string=leather" className="hs-banner">
+        <Link to="/products?category=Shackets" className="hs-banner">
           <LoadIcon
             n={1}
             width="100%"
@@ -100,18 +99,21 @@ export default function HomeSections() {
             }}
           />
           <div className="hs-banner-label">
-            <span>shackets</span>
+            <span>Shackets</span>
             <i className="fa-solid fa-arrow-right" />
           </div>
         </Link>
       </div>
 
-      {/* CATEGORIAS */}
       <div className="hs-section">
         <h2 className="hs-title shadow">categorías</h2>
         <div className="hs-cats">
           {categories.map((c, i) => (
-            <Link key={i} to={`/products?string=${c.slug}`} className="hs-cat">
+            <Link
+              key={i}
+              to={`/products?category=${encodeURIComponent(c.slug)}`}
+              className="hs-cat"
+            >
               <div className="hs-cat-img-wrap">
                 <LoadIcon n={1} width="100%" height="320px" />
                 <div
@@ -125,7 +127,6 @@ export default function HomeSections() {
         </div>
       </div>
 
-      {/* BENEFICIOS */}
       <div className="hs-benefits">
         {benefits.map((b, i) => (
           <div key={i} className="hs-benefit">
@@ -136,14 +137,13 @@ export default function HomeSections() {
         ))}
       </div>
 
-      {/* COLORES */}
       <div className="hs-section">
         <h2 className="hs-title shadow">colores</h2>
         <div className="hs-cats">
           {colors.map((c, i) => (
             <Link
               key={i}
-              to={`/products?string=${c.slug}`}
+              to={`/products?color=${encodeURIComponent(c.slug)}`}
               className="hs-color"
             >
               <div className="hs-color-swatch" style={{ background: c.hex }} />

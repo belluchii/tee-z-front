@@ -1,6 +1,19 @@
 import "./footer.css";
+import { useNavigate, useLocation } from "react-router-dom";
 
 export default function Footer() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleNav = (path) => {
+    if (location.pathname === path) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      navigate(path);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
   return (
     <footer className="footer">
       <div className="footer-inner">
@@ -19,15 +32,31 @@ export default function Footer() {
 
           <div className="footer-col">
             <h4 className="footer-col-title">navegación</h4>
-            <p className="footer-col-item">productos</p>
-            <p className="footer-col-item">categorías</p>
-            <p className="footer-col-item">nuevo</p>
+            <p className="footer-col-item link" onClick={() => handleNav("/")}>
+              home
+            </p>
+            <p
+              className="footer-col-item link"
+              onClick={() => handleNav("/products")}
+            >
+              productos
+            </p>
           </div>
 
           <div className="footer-col">
             <h4 className="footer-col-title">cuenta</h4>
-            <p className="footer-col-item">iniciar sesión</p>
-            <p className="footer-col-item">registrarse</p>
+            <p
+              className="footer-col-item link"
+              onClick={() => handleNav("/login")}
+            >
+              iniciar sesión
+            </p>
+            <p
+              className="footer-col-item link"
+              onClick={() => handleNav("/register")}
+            >
+              registrarse
+            </p>
           </div>
         </div>
       </div>

@@ -78,6 +78,10 @@
   text-transform: uppercase;
 }
 
+.link {
+  cursor: pointer;
+}
+
 @media (max-width: 768px) {
   .footer-inner {
     flex-direction: column;

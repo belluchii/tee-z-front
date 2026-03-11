@@ -33,17 +33,23 @@ export default function Individual() {
     refetch();
   }, [refetch, data.cart]);
 
+  useEffect(() => {
+    setProduct([]);
+  }, [id]);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
+
   usePutData({ data, setData, email: data.email });
 
-  const isFav = data.favs?.includes(product.name);
+  const isFav = data.favs?.includes(id);
 
   const toggleFav = () => {
     if (!data.favs) return;
     setData({
       ...data,
-      favs: isFav
-        ? data.favs.filter((f) => f !== product.name)
-        : [...data.favs, product.name],
+      favs: isFav ? data.favs.filter((f) => f !== id) : [...data.favs, id],
     });
   };
 

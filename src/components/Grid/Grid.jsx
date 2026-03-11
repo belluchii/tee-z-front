@@ -13,7 +13,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import "./grid.css";
 import Pagination from "../../common/pagination/Pagination";
 import Filter from "../../common/Filter/Filter";
-import LoadIcon from "../../common/load-icon/Load-icon";
+import Spinner from "../../common/spinner/Spinner";
 import { useFetchData } from "../../hooks/fetchData";
 import useIsLoading from "../../hooks/useIsLoading";
 
@@ -35,7 +35,7 @@ export default function Grid({ arr }) {
     setPage(1);
   }, []);
 
-  const [isLoading, withLoading] = useIsLoading();
+  const [isLoading, withLoading] = useIsLoading(true);
   const debounceRef = useRef(null);
 
   useEffect(() => {
@@ -110,7 +110,12 @@ export default function Grid({ arr }) {
       : products.products;
 
   const renderContent = () => {
-    if (isLoading) return <LoadIcon n={12} cont={false} />;
+    if (isLoading)
+      return (
+        <div className="grid-empty">
+          <Spinner />;
+        </div>
+      );
     if (!displayProducts?.length) {
       return (
         <div className="grid-empty">

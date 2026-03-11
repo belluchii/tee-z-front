@@ -1,8 +1,8 @@
 import { useState, useCallback } from "react";
 
 // Hook personalizado useIsLoading
-const useIsLoading = () => {
-  const [isLoading, setIsLoading] = useState(false);
+const useIsLoading = (bool = false) => {
+  const [isLoading, setIsLoading] = useState(bool);
 
   const withLoading = useCallback(async (asyncFunc) => {
     setIsLoading(true);

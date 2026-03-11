@@ -3,17 +3,17 @@ import { Link } from "react-router-dom";
 import { useContext, useState } from "react";
 import "./product.css";
 
-export default function Product({ name, price, src, id }) {
+export default function Product({ name, price, src, id, onClick = () => {} }) {
   const { data, setData } = useContext(DataContext);
   const [hovered, setHovered] = useState(false);
 
-  const isFav = data.favs?.includes(name);
+  const isFav = data.favs?.includes(id);
 
   const toggleFav = () => {
     if (!data.favs) return;
     setData({
       ...data,
-      favs: isFav ? data.favs.filter((f) => f !== name) : [...data.favs, name],
+      favs: isFav ? data.favs.filter((f) => f !== id) : [...data.favs, id],
     });
   };
 
@@ -25,6 +25,7 @@ export default function Product({ name, price, src, id }) {
     >
       <Link to={"/products/" + id} className="product-img-wrap">
         <div
+          onClick={onClick}
           className="product-img"
           style={{ backgroundImage: `url(${src})` }}
         />

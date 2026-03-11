@@ -144,9 +144,6 @@ export default function Navbar({ categories = [] }) {
             <Link to="/products" className="nav-label">
               productos
             </Link>
-            <Link to="/products" className="nav-label">
-              nuevo
-            </Link>
           </div>
 
           <div className="nav-right">
@@ -260,13 +257,7 @@ export default function Navbar({ categories = [] }) {
             >
               productos
             </Link>
-            <Link
-              to="/products"
-              className="drop-item"
-              onClick={() => setMenuOpen(false)}
-            >
-              nuevo
-            </Link>
+
             <div className="mobile-divider" />
             {data?.email ? (
               <>

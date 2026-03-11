@@ -5,6 +5,7 @@ import { apilarProductos } from "../../utils/historyUtils";
 import { useFetchMultipleData } from "../../hooks/fetchData";
 import { getOneProduct } from "../../services/productServices";
 import Title from "../Title/Title";
+import Spinner from "../spinner/Spinner";
 import "./history.css";
 
 export default function History() {
@@ -27,37 +28,47 @@ export default function History() {
 
   return (
     <div className="history-wrapper">
-      <Title h2={"Historial"} />
       <div className="history-grid">
         {data.history?.length >= 1 ? (
-          apilarProductos(data.history).map((elem, index) => {
-            const prod = getProduct(elem._id);
-            return (
-              <div
-                key={index}
-                className="history-card"
-                onClick={() => navigate(`/products/${elem._id}`)}
-              >
-                <img
-                  className="history-card-img"
-                  src={prod?.image}
-                  alt={prod?.name}
-                />
-                <div className="history-card-info">
-                  <h2 className="history-card-name">{prod?.name}</h2>
-                  <p className="history-card-quantity">{elem.stock} unidades</p>
-                  <h3 className="history-card-price">
-                    ${prod ? elem.stock * prod.price : 0}
-                  </h3>
+          products.length === 0 ? (
+            <div className="spinner-cont">
+              <Spinner />
+            </div>
+          ) : (
+            apilarProductos(data.history).map((elem, index) => {
+              const prod = getProduct(elem._id);
+              return (
+                <div
+                  key={index}
+                  className="history-card"
+                  onClick={() => navigate(`/products/${elem._id}`)}
+                >
+                  <img
+                    className="history-card-img"
+                    src={prod?.image}
+                    alt={prod?.name}
+                  />
+                  <div className="history-card-info">
+                    <h2 className="history-card-name">{prod?.name}</h2>
+                    <p className="history-card-quantity">
+                      {elem.stock} unidades
+                    </p>
+                    <h3 className="history-card-price">
+                      ${prod ? elem.stock * prod.price : 0}
+                    </h3>
+                  </div>
                 </div>
-              </div>
-            );
-          })
+              );
+            })
+          )
         ) : (
           <p className="history-empty">
-            {data.email
-              ? "aun no realizaste ninguna compra"
-              : "logueate para ver tu historial"}
+            <i className="fa-solid fa-bag-shopping" />
+            <span>
+              {data.email
+                ? " aun no realizaste ninguna compra"
+                : " logueate para ver tu historial"}
+            </span>
           </p>
         )}
       </div>

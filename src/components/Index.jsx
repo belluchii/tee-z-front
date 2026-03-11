@@ -1,10 +1,10 @@
 import HomeSections from "../common/home-sections/HomeSections";
-import Main from "../common/main/Main";
+import Header from "../common/Header/Header";
 
 export default function Index() {
   return (
     <>
-      <Main />
+      <Header />
       <HomeSections />
     </>
   );

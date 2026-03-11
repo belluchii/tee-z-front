@@ -9,23 +9,38 @@ import Nav from "./common/nav/Nav";
 import "./App.css";
 import History from "./common/history/History";
 import Footer from "./common/footer/Footer";
+import FavsGrid from "./components/FavsGrid/FavsGrid";
+import { usePutData } from "./hooks/putData";
+import { useContext } from "react";
+import DataContext from "./context/context";
+import NotFound from "./components/NotFound/NotFound";
+
+function AppInner() {
+  const { data, setData } = useContext(DataContext);
+  usePutData({ data, setData });
+
+  return (
+    <div className="App">
+      <Nav />
+      <Routes>
+        <Route element={<Individual />} path="/products/:id" />
+        <Route element={<FavsGrid />} path="/products/favs" />
+        <Route element={<History />} path="/products/history" />
+        <Route element={<Register />} path="/register" />
+        <Route element={<Grid />} path="/products" />
+        <Route element={<Login />} path="/login" />
+        <Route element={<Index />} path="/" />
+        <Route element={<NotFound />} path="*" />
+      </Routes>
+      <Footer />
+    </div>
+  );
+}
 
 function App() {
   return (
     <DataProvider>
-      <div className="App">
-        <Nav />
-        <Routes>
-          <Route element={<Individual />} path="/products/:id" />
-          <Route element={<Grid arr={"favs"} />} path="/products/favs" />
-          <Route element={<History />} path="/products/history" />
-          <Route element={<Register />} path="/register" />
-          <Route element={<Grid />} path="/products" />
-          <Route element={<Login />} path="/login" />
-          <Route element={<Index />} path="/" />
-        </Routes>
-        <Footer />
-      </div>
+      <AppInner />
     </DataProvider>
   );
 }

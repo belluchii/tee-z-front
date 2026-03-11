@@ -7,6 +7,7 @@
   max-width: calc(280px * 4 + 40px * 3);
   gap: 40px 0px;
   justify-content: space-between;
+  align-content: start;
 }
 
 .grid-layout {
@@ -31,6 +32,9 @@
 }
 
 .grid-empty {
+  position: absolute;
+  width: 100%;
+  left: 0;
   grid-column: 1 / -1;
   display: flex;
   flex-direction: column;
