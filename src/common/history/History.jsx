@@ -4,7 +4,6 @@ import DataContext from "../../context/context";
 import { apilarProductos } from "../../utils/historyUtils";
 import { useFetchMultipleData } from "../../hooks/fetchData";
 import { getOneProduct } from "../../services/productServices";
-import Title from "../Title/Title";
 import Spinner from "../spinner/Spinner";
 import "./history.css";
 
