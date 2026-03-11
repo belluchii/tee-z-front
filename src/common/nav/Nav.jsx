@@ -79,7 +79,7 @@ export default function Navbar({ categories = [] }) {
       <nav className="navbar">
         <div className="navbar-inner">
           <Link to="/" className="nav-logo">
-            <img src="./z-render.webp" alt="logo" height={40} />
+            <img src="/z-render.webp" alt="logo" height={40} />
           </Link>
 
           <div className="nav-center">

@@ -65,7 +65,7 @@ export default function HomeSections() {
   ];
 
   return (
-    <div className="hs-wrap">
+    <main className="hs-wrap">
       {/* BANNERS DOBLES */}
       <div className="hs-banners">
         <Link to="/products?string=trench" className="hs-banner">
@@ -152,6 +152,6 @@ export default function HomeSections() {
           ))}
         </div>
       </div>
-    </div>
+    </main>
   );
 }

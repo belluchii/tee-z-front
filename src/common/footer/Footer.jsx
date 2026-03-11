@@ -28,7 +28,6 @@ export default function Footer() {
             <h4 className="footer-col-title">cuenta</h4>
             <p className="footer-col-item">iniciar sesión</p>
             <p className="footer-col-item">registrarse</p>
-            <p className="footer-col-item">favoritos</p>
           </div>
         </div>
       </div>

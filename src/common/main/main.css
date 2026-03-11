@@ -1,4 +1,4 @@
-main {
+header {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -11,10 +11,10 @@ main {
 }
 
 @media (max-width: 1000px) {
-  main img {
+  header img {
     width: 320px;
   }
-  main {
+  header {
     height: 200px;
   }
 }

@@ -2,8 +2,8 @@ import "./main.css";
 
 export default function Main() {
   return (
-    <main>
+    <header>
       <img src="./z-render.png" width={320} alt="" />
-    </main>
+    </header>
   );
 }
