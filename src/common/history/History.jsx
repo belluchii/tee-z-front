@@ -27,43 +27,45 @@ export default function History() {
 
   return (
     <div className="history-wrapper">
-      <h2 className="history-title">Historial</h2>
       {data.history?.length >= 1 ? (
         products.length === 0 ? (
           <div className="spinner-cont">
             <Spinner />
           </div>
         ) : (
-          <div className="history-list">
-            {apilarProductos(data.history).map((elem, index) => {
-              const prod = getProduct(elem._id);
-              return (
-                <div
-                  key={index}
-                  className="history-row"
-                  onClick={() => navigate(`/products/${elem._id}`)}
-                >
-                  <span className="history-row-index">{index + 1}</span>
-                  <img
-                    className="history-row-img"
-                    src={prod?.image}
-                    alt={prod?.name}
-                  />
-                  <p className="history-row-name">{prod?.name}</p>
-                  <p className="history-row-qty">{elem.stock} u.</p>
-                  <p className="history-row-price">
-                    ${prod ? elem.stock * prod.price : 0}
-                  </p>
-                  <div className="history-row-bottom">
+          <>
+            <h2 className="history-title">Historial</h2>
+            <div className="history-list">
+              {apilarProductos(data.history).map((elem, index) => {
+                const prod = getProduct(elem._id);
+                return (
+                  <div
+                    key={index}
+                    className="history-row"
+                    onClick={() => navigate(`/products/${elem._id}`)}
+                  >
+                    <span className="history-row-index">{index + 1}</span>
+                    <img
+                      className="history-row-img"
+                      src={prod?.image}
+                      alt={prod?.name}
+                    />
+                    <p className="history-row-name">{prod?.name}</p>
+                    <p className="history-row-qty">{elem.stock} u.</p>
                     <p className="history-row-price">
                       ${prod ? elem.stock * prod.price : 0}
                     </p>
-                    <p className="history-row-qty">{elem.stock} u.</p>
+                    <div className="history-row-bottom">
+                      <p className="history-row-price">
+                        ${prod ? elem.stock * prod.price : 0}
+                      </p>
+                      <p className="history-row-qty">{elem.stock} u.</p>
+                    </div>
                   </div>
-                </div>
-              );
-            })}
-          </div>
+                );
+              })}
+            </div>
+          </>
         )
       ) : (
         <p className="history-empty">
