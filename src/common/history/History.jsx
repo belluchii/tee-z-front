@@ -27,50 +27,54 @@ export default function History() {
 
   return (
     <div className="history-wrapper">
-      <div className="history-grid">
-        {data.history?.length >= 1 ? (
-          products.length === 0 ? (
-            <div className="spinner-cont">
-              <Spinner />
-            </div>
-          ) : (
-            apilarProductos(data.history).map((elem, index) => {
+      <h2 className="history-title">Historial</h2>
+      {data.history?.length >= 1 ? (
+        products.length === 0 ? (
+          <div className="spinner-cont">
+            <Spinner />
+          </div>
+        ) : (
+          <div className="history-list">
+            {apilarProductos(data.history).map((elem, index) => {
               const prod = getProduct(elem._id);
               return (
                 <div
                   key={index}
-                  className="history-card"
+                  className="history-row"
                   onClick={() => navigate(`/products/${elem._id}`)}
                 >
+                  <span className="history-row-index">{index + 1}</span>
                   <img
-                    className="history-card-img"
+                    className="history-row-img"
                     src={prod?.image}
                     alt={prod?.name}
                   />
-                  <div className="history-card-info">
-                    <h2 className="history-card-name">{prod?.name}</h2>
-                    <p className="history-card-quantity">
-                      {elem.stock} unidades
-                    </p>
-                    <h3 className="history-card-price">
+                  <p className="history-row-name">{prod?.name}</p>
+                  <p className="history-row-qty">{elem.stock} u.</p>
+                  <p className="history-row-price">
+                    ${prod ? elem.stock * prod.price : 0}
+                  </p>
+                  <div className="history-row-bottom">
+                    <p className="history-row-price">
                       ${prod ? elem.stock * prod.price : 0}
-                    </h3>
+                    </p>
+                    <p className="history-row-qty">{elem.stock} u.</p>
                   </div>
                 </div>
               );
-            })
-          )
-        ) : (
-          <p className="history-empty">
-            <i className="fa-solid fa-bag-shopping" />
-            <span>
-              {data.email
-                ? " aun no realizaste ninguna compra"
-                : " logueate para ver tu historial"}
-            </span>
-          </p>
-        )}
-      </div>
+            })}
+          </div>
+        )
+      ) : (
+        <p className="history-empty">
+          <i className="fa-solid fa-bag-shopping" />
+          <span>
+            {data.email
+              ? "aun no realizaste ninguna compra"
+              : "logueate para ver tu historial"}
+          </span>
+        </p>
+      )}
     </div>
   );
 }
