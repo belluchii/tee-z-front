@@ -1,68 +1,67 @@
-Tee-Z
+# Tee-Z — Frontend
 
-Proyecto con fines de estudio conectado al portfolio de Valentin Berger.
+Frontend de un ecommerce de remeras con carrito de compras, autenticación de usuarios.
 
-Este es un proyecto de ecommerce para la venta de remeras. El sistema permite a los usuarios ver, buscar y comprar remeras.
+🔗 [Demo en vivo](https://tee-z.netlify.app/) · [Backend](https://github.com/belluchii/tee-z-back)
 
-Características
+## ¿Qué es?
 
-Usuarios: Registro, inicio de sesión y gestión de cuentas de usuario.
+Aplicación web de ecommerce que permite a los usuarios explorar, buscar y comprar remeras. Incluye gestión de cuentas, carrito de compras, búsqueda con filtros y seguimiento de pedidos.
 
-Productos: Visualización, búsqueda y filtrado de remeras.
+## Funcionalidades
 
-Carrito de Compras: Añadir, actualizar y eliminar productos del carrito.
+- **Usuarios** — Registro, inicio de sesión y gestión de cuenta con JWT
+- **Productos** — Visualización, búsqueda y filtrado por categoría, color y precio
+- **Carrito** — Agregar, actualizar y eliminar productos
+- **Pedidos** — Realización y seguimiento
 
-Pedidos: Realización y seguimiento de pedidos.
+## Tech Stack
 
-Administración: Gestión de productos, incluyendo la creación, actualización y eliminación.
+- **Framework:** React.js
+- **HTTP Client:** Axios
+- **Autenticación:** JWT
 
-Tecnologías Utilizadas
+## Requisitos
 
-Frontend: React.js, Axios.
+- Node.js >= 18.x
+- Backend corriendo localmente o en producción
 
-Autenticación: JSON Web Tokens (JWT).
+## Instalación
 
-Instalación
-Sigue estos pasos para configurar y ejecutar el proyecto en tu entorno local.
+1. Clonar el repositorio:
 
-Prerrequisitos
-
-Node.js (versión 18 o superior)
-
-Clonar el repositorio
-
-git clone https://github.com/belluchii/tee-z-front
-
+```bash
+git clone https://github.com/belluchii/tee-z-front.git
 cd tee-z-front
+```
 
-Instala las dependencias:
+2. Instalar dependencias:
 
+```bash
 npm install
+```
 
-Configurar variables de entorno
+3. Crear un archivo `.env`:
 
-Crea un archivo .env en el directorio frontend con el siguiente contenido:
-
+```env
 REACT_APP_API_KEY=http://localhost:3001
+```
 
-Inicia la aplicación:
+4. Iniciar la aplicación:
 
+```bash
 npm start
+```
 
-Uso:
-Accede a la aplicación en tu navegador en http://localhost:3000.
-Regístrate o inicia sesión para comenzar a comprar remeras.
+La app estará disponible en `http://localhost:3000`.
 
-Contribución
-¡Contribuciones son bienvenidas! Por favor, sigue los siguientes pasos para contribuir:
+## Scripts disponibles
 
-Haz un fork del repositorio.
-Crea una nueva rama (git checkout -b feature/nueva-funcionalidad).
-Realiza tus cambios.
-Haz un commit de tus cambios (git commit -am 'Agrega nueva funcionalidad').
-Haz un push a la rama (git push origin feature/nueva-funcionalidad).
-Abre un Pull Request.
+| Comando | Descripción |
+|---|---|
+| `npm start` | Inicia el servidor de desarrollo |
+| `npm run build` | Genera el build de producción |
 
-Licencia
+## Repositorios relacionados
 
-Este proyecto está bajo la licencia MIT. Consulta el archivo LICENSE para más detalles.
+- [tee-z-back](https://github.com/belluchii/tee-z-back) — API REST con Node.js, Express y MongoDB
